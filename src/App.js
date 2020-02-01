@@ -11,15 +11,24 @@ const init_order = {
 const reducer = (state = init_order, action) => {
   switch (action.type) {
     case 'ADD_ITEM':
-      return(
-        {...state, order: [...state.order, action.item]}
-      )
+      return {...state, order: [...state.order, action.item]}
+
     case 'GET_TOTAL':
           var tot=0
           return (state.order.map(item => {
             tot+=item.cost
           }))
 
+    case 'UPDATE_CART':
+      console.log('ciao')
+      console.log(action.title)
+      return {
+        ...state,
+        order: state.order.map(order =>
+          order.title.localeCompare(action.title)===0 ? {...order, quantity: action.quantity}:
+          order
+        )
+      }
 
   }
   return state
