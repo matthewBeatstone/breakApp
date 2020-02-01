@@ -93,12 +93,11 @@ class ShopCard extends Component {
   render(){
     return (
       <div>
-      {this.props.order.map(item => (
         <Card style={card}>
           <div style={details}>
             <CardContent style={content}>
               <Typography component="h5" variant="h5">
-                {item.title}
+                {this.state.title}
               </Typography>
             </CardContent>
             <div style={controls}>
@@ -114,7 +113,6 @@ class ShopCard extends Component {
             </div>
           </div>
         </Card>
-      ))}
       </div>
 
     )
