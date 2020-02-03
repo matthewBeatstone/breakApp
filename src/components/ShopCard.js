@@ -95,6 +95,7 @@ class ShopCard extends Component {
   render(){
     return (
       <div>
+        <Card style={card}>
           <div style={details}>
             <CardContent style={content}>
               <Typography component="h5" variant="h5">
@@ -112,6 +113,7 @@ class ShopCard extends Component {
               </IconButton>
             </div>
           </div>
+        </Card>
       </div>
 
     )
