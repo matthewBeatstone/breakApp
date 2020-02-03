@@ -13,6 +13,8 @@ import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import IconButton from '@material-ui/core/IconButton';
 import FlatList from 'flatlist-react'
+import Typography from '@material-ui/core/Typography';
+
 
 
 function mapStateToProps(state){
@@ -53,31 +55,33 @@ class Home extends Component {
                 <ProductCategories />
 
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <div>
-                  {this.props.order.map(item => (
+                <GridList>
+
                       <ScrollArea
                         speed={0.8}
                         className="area"
                         contentClassName="content"
                         horizontal={false}
                         style = {{
-                          marginLeft: 200,
+                          marginLeft: 400,
                           height: 500
-                        }}
-                        >
-                        <div>
-                          <ShopCard itemTitle={item.title} quantity={item.quantity} />
-                          <h3> {item.quantity} </h3>
+                        }}>
+
+                        {this.props.order.map(item => (
+                        <div style={{marginLeft: 200}}>
+                          <ShopCard
+                            itemTitle={item.title}
+                            quantity={item.quantity} />
+                            <Typography component='h5' variant='h5'>
+                            {item.quantity}
+                            </Typography>
                           {console.log(this.props.order)}
                           </div>
 
-                      </ScrollArea>
+
                       ))}
-
-
-                   </div>
-                </Grid>
+                      </ScrollArea>
+                </GridList>
                 </Grid>
               </div>
 

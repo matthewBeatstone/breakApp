@@ -13,22 +13,34 @@ const reducer = (state = init_order, action) => {
     case 'ADD_ITEM':
       return {...state, order: [...state.order, action.item]}
 
-    case 'GET_TOTAL':
-          var tot=0
-          return (state.order.map(item => {
-            tot+=item.cost
-          }))
-
     case 'UPDATE_CART':
       console.log('ciao')
       console.log(action.title)
       return {
         ...state,
-        order: state.order.map(order =>
-          order.title.localeCompare(action.title)===0 ? {...order, quantity: action.quantity}:
-          order
+        order: state.order.map(item =>
+          item.title.localeCompare(action.title)===0 ? {...item, quantity: action.quantity}:
+          item
         )
       }
+
+      case 'REMOVE_ITEM':
+      return {
+        ...state,
+        order: state.order.filter(item =>
+          item.title.localeCompare(action.title) !==0
+        )
+      }
+
+
+
+
+
+    case 'GET_TOTAL':
+        var tot=0
+        return (state.order.map(item => {
+          tot+=item.cost
+        }))
 
   }
   return state

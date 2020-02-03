@@ -10,21 +10,6 @@ import Button from '@material-ui/core/Button';
 import {connect} from 'react-redux';
 
 
-function mapStateToProps(state){
-  return {
-    order: state.order
-  }
-}
-
-function mapDispatchToProps(dispatch){
-  return {
-    update_cart: (title, quantity) =>
-            dispatch({type:'UPDATE_CART', title:title,quantity:quantity}),
-
-  }
-}
-
-
 const card = {
     display: 'flex',
   };
@@ -37,9 +22,9 @@ const content = {
     flex: '1 0 auto',
   };
 const cover = {
-    width: 400,
+    width: 100,
     height: 150,
-    marginLeft: 150
+    marginLeft: 300
 
   };
 const controls = {
@@ -55,6 +40,23 @@ const button = {
   backgroundColor: 'orange',
 }
 
+
+
+function mapStateToProps(state){
+  return {
+    order: state.order
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return {
+    update_cart: (title, quantity) =>
+            dispatch({type:'UPDATE_CART', title:title, quantity:quantity}),
+
+    remove_item: (title) => dispatch({type: 'REMOVE_ITEM', title:title}),
+
+  }
+}
 
 
 
@@ -83,38 +85,33 @@ class ShopCard extends Component {
       this.setState({quantity: --this.state.quantity})
       console.log(this.state.quantity)
       this.props.update_cart(this.state.title, this.state.quantity)
-
     }
-
+    if (this.state.quantity === 0){
+      this.props.remove_item(this.state.title)
   }
 
-
+  }
 
   render(){
     return (
       <div>
-      {this.props.order.map(item => (
-        <Card style={card}>
           <div style={details}>
             <CardContent style={content}>
               <Typography component="h5" variant="h5">
-                {item.title}
+                {this.state.title}
               </Typography>
             </CardContent>
             <div style={controls}>
-              <IconButton aria-label="previous" onClick={this.remove.bind(this)}>
+                <IconButton
+                  aria-label="previous"
+                  onClick={this.remove.bind(this)}>
                  <RemoveCircleRoundedIcon />
               </IconButton>
-              <Typography component='h5' variant='h5'>
-              </Typography>
               <IconButton aria-label="next" onClick={this.add.bind(this)}>
                 <AddCircleRoundedIcon />
               </IconButton>
-
             </div>
           </div>
-        </Card>
-      ))}
       </div>
 
     )
