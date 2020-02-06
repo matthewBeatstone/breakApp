@@ -59,14 +59,16 @@ class ShopCard extends Component {
 
 
   add(){
+
     this.setState({quantity: ++this.state.quantity})
-    this.props.update_cart(this.state.title, this.state.quantity, this.state.cost+this.state.itemCost)
+    this.props.update_cart(this.state.title, this.state.quantity, this.state.itemCost*this.state.quantity)
   }
 
   remove(){
     if(this.state.quantity > 0){
       this.setState({quantity: --this.state.quantity})
-      this.props.update_cart(this.state.title, this.state.quantity, this.state.cost-this.state.itemCost)
+      console.log(this.state.cost, this.state.itemCost)
+      this.props.update_cart(this.state.title, this.state.quantity, this.state.itemCost*this.state.quantity)
     }
 
     if (this.state.quantity === 0){

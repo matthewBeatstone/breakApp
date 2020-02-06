@@ -15,6 +15,7 @@ const reducer = (state = init_order, action) => {
 
 
     case 'UPDATE_CART':
+      console.log(action.cost)
       return {
         ...state,
         order: state.order.map(item =>

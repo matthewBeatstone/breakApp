@@ -43,7 +43,6 @@ class Home extends Component {
                           <ShopCard
                             itemTitle={item.title}
                             quantity={item.quantity}
-                            cost = {item.totCost}
                             itemCost = {item.itemCost}
                             />
                             <Typography component='h5' variant='h5'>
@@ -54,9 +53,7 @@ class Home extends Component {
                       ))}
 
                       </ScrollArea>
-                      <Typography component='h5' variant='h5'>
-                        {this.props.get_total()}
-                      </Typography>
+
                 </GridList>
                 </Grid>
               </div>
