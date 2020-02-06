@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Home from './screens/Home.js'
 import {Provider} from 'react-redux';
 import {createStore} from 'redux'
 
 const init_order = {
-  order : [],
+  order : [],  //initial order stack
 }
 
 const reducer = (state = init_order, action) => {
   switch (action.type) {
+
     case 'ADD_ITEM':
       return {...state, order: [...state.order, action.item]}
 
+
     case 'UPDATE_CART':
-      console.log('ciao')
-      console.log(action.title)
       return {
         ...state,
         order: state.order.map(item =>
-          item.title.localeCompare(action.title)===0 ? {...item, quantity: action.quantity}:
+          item.title.localeCompare(action.title)===0 ?
+          {...item, quantity: action.quantity, totCost: action.cost}:
           item
         )
       }
 
-      case 'REMOVE_ITEM':
+    case 'REMOVE_ITEM':
       return {
         ...state,
         order: state.order.filter(item =>
@@ -32,15 +32,13 @@ const reducer = (state = init_order, action) => {
         )
       }
 
-
-
-
-
     case 'GET_TOTAL':
-        var tot=0
-        return (state.order.map(item => {
-          tot+=item.cost
-        }))
+      var total
+      state.order.map(item =>{
+        total += item.totCost
+      })
+      console.log(total)
+      return total
 
   }
   return state

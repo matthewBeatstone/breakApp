@@ -48,11 +48,10 @@ const controls = {
 
   };
 
-
 const button = {
   width: 90,
   height: 30,
-  backgroundColor: 'orange',
+  backgroundColor: '#FF8C00',
 }
 
 
@@ -96,7 +95,7 @@ class ItemCard extends Component {
                <RemoveCircleRoundedIcon />
             </IconButton>
             <h3> {this.state.quantity} </h3>
-            <IconButton aria-label="next" onClick = {this.addItem.bind(this)}>
+            <IconButton aria-label="next" onClick={this.addItem.bind(this)}>
               <AddCircleRoundedIcon />
             </IconButton>
             <Button
@@ -106,7 +105,8 @@ class ItemCard extends Component {
             onClick={() => this.props.add_item({
               title: this.state.title,
               quantity: this.state.quantity,
-              cost: (this.state.itemCost * this.state.quantity)
+              totCost: this.state.itemCost*this.state.quantity,
+              itemCost: this.state.itemCost
             })}>
 
               Aggiungi

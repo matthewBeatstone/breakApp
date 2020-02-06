@@ -12,7 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import Beer from './Beer.js'
 
 const card = {
-  maxWidth: 345
+  maxWidth: 345,
+  background:'#FF8C00'
 };
 const media = {
   height: 140
@@ -31,15 +32,12 @@ const modalContainer = {
 
 const cardContainer = {
   height: 270,
-  width: 380
+  width: 350,
+  bgColor:'#FF8C00',
 };
 
 
 class ProductCard extends Component {
-  constructor(props){
-    super(props);
-  }
-
 
   render(){
     return (
@@ -93,16 +91,16 @@ export default class ProductCategories extends Component {
         className="area"
         contentClassName="content"
         horizontal={false}
-        style = {{
-          width: 1200,
-          height: 800
+        style={{
+          width: 1500,
+          height: 865
         }}
         >
         <div>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-              <ProductCard title = {'birra'} pic={this.beerImg}/>
+              <ProductCard title={'birra'} pic={this.beerImg}/>
               </button>
                     <Modal
                       aria-labelledby="transition-modal-title"
@@ -113,7 +111,7 @@ export default class ProductCategories extends Component {
                       closeAfterTransition
                       BackdropComponent={Backdrop}
                       BackdropProps={{
-                        timeout: 500,
+                        timeout: 1000,
                       }}
                     >
                       <Fade in={this.state.modalState}>
@@ -124,26 +122,36 @@ export default class ProductCategories extends Component {
                     </Modal>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard/>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
-            </Grid>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>            </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
-            </Grid>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>            </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
-            </Grid>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>            </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
-            </Grid>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>            </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard />
-            </Grid>
+            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+            <ProductCard title={'birra'} pic={this.beerImg}/>
+            </button>
+             </Grid>
             </Grid>
       </div>
     </ScrollArea>
