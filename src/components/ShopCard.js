@@ -65,27 +65,17 @@ class ShopCard extends Component {
   }
 
   remove(){
-    if(this.state.quantity > 0){
+    if(this.state.quantity > 1){
       this.setState({quantity: --this.state.quantity})
       console.log(this.state.cost, this.state.itemCost)
       this.props.update_cart(this.state.title, this.state.quantity, this.state.itemCost*this.state.quantity)
     }
-
-    if (this.state.quantity === 0){
-      this.props.remove_item(this.state.title)
-    }
-
   }
 
   render(){
     return (
       <div>
         <div style={details}>
-          <CardContent style={content}>
-            <Typography component="h5" variant="h5">
-              {this.state.title}
-            </Typography>
-          </CardContent>
           <div style={controls}>
               <IconButton
                 aria-label="previous"

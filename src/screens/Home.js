@@ -8,9 +8,15 @@ import {connect} from 'react-redux'
 import ScrollArea from 'react-scrollbar'
 import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
 
 
+const content = {
+    flex: '1 0 auto',
+    background:'#FF8C00',
+    marginTop: 20,
+  };
 
 
 
@@ -27,19 +33,21 @@ class Home extends Component {
 
                 </Grid>
                 <GridList>
-
+                    <div style={{marginLeft: 800}}>
                       <ScrollArea
                         speed={0.8}
                         className="area"
                         contentClassName="content"
                         horizontal={false}
                         style={{
-                          marginLeft: 820,
                           height: 865,
                         }}>
 
                         {this.props.order.map(item => (
-                        <div>
+                          <CardContent style={content}>
+                          <Typography component='h5' variant='h5'>
+                            {item.title}
+                          </Typography>
                           <ShopCard
                             itemTitle={item.title}
                             quantity={item.quantity}
@@ -49,11 +57,12 @@ class Home extends Component {
                             {item.quantity}
                             </Typography>
                           {console.log(this.props.order)}
-                          </div>
+                          </CardContent>
+
                       ))}
 
                       </ScrollArea>
-
+                      </div>
                 </GridList>
                 </Grid>
               </div>
