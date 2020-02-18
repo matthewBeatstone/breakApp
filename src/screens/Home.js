@@ -32,8 +32,9 @@ class Home extends Component {
                 <ProductCategories />
 
                 </Grid>
+                <Grid item xs={12} sm={6}>
                 <GridList>
-                    <div style={{marginLeft: 800}}>
+                    <div style={{marginLeft: 600, height: 800}}>
                       <ScrollArea
                         speed={0.8}
                         className="area"
@@ -44,6 +45,7 @@ class Home extends Component {
                         }}>
 
                         {this.props.order.map(item => (
+                          <div key={item.title}>
                           <CardContent style={content}>
                           <Typography component='h5' variant='h5'>
                             {item.title}
@@ -56,14 +58,18 @@ class Home extends Component {
                             <Typography component='h5' variant='h5'>
                             {item.quantity}
                             </Typography>
+                            <Typography>
+                              {item.totCost}
+                            </Typography>
                           {console.log(this.props.order)}
                           </CardContent>
-
+                          </div>
                       ))}
 
                       </ScrollArea>
                       </div>
                 </GridList>
+                </Grid>
                 </Grid>
               </div>
 

@@ -19,7 +19,7 @@ const reducer = (state = init_order, action) => {
       return {
         ...state,
         order: state.order.map(item =>
-          item.title.localeCompare(action.title)===0 ?
+          item.title.localeCompare(action.title) === 0 ?
           {...item, quantity: action.quantity, totCost: action.cost}:
           item
         )

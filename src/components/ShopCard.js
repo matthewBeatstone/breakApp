@@ -4,7 +4,11 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
+
+
 import {connect} from 'react-redux';
+
 
 
 const details = {
@@ -70,6 +74,8 @@ class ShopCard extends Component {
       console.log(this.state.cost, this.state.itemCost)
       this.props.update_cart(this.state.title, this.state.quantity, this.state.itemCost*this.state.quantity)
     }
+
+
   }
 
   render(){
@@ -85,6 +91,7 @@ class ShopCard extends Component {
             <IconButton aria-label="next" onClick={this.add.bind(this)}>
               <AddCircleRoundedIcon />
             </IconButton>
+            <HighlightOffTwoToneIcon onClick={() => this.props.remove_item(this.state.title)}/>
           </div>
         </div>
     </div>

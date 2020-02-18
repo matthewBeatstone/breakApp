@@ -30,18 +30,16 @@ class Cart extends Component {
           className="area"
           contentClassName="content"
           horizontal={false}
-          style={{
-            height: 650
-          }}
+
           >
             {this.props.order.map(item =>{
-              <div>
-                  <ShopCard itemTitle={item.title} />
+              <div key={item.title}>
+                  <ShopCard style={{maxWidth: 350}}itemTitle={item.title} />
               </div>
             }
 
             )}
-      
+
 
         </ScrollArea>
     )
