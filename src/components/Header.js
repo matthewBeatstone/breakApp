@@ -16,7 +16,7 @@ export default class Header extends Component {
       <div style={root}>
         <AppBar position="static">
           <Toolbar variant="dense" style={{
-            backgroundColor: 'orange'
+            backgroundColor: '#FF8C00'
           }}>
             <Typography variant="h6" color="inherit">
               LOGO

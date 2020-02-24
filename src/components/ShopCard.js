@@ -49,6 +49,7 @@ function mapDispatchToProps(dispatch){
 
 
 
+
 class ShopCard extends Component {
 
   constructor(props){
@@ -58,6 +59,17 @@ class ShopCard extends Component {
       quantity: this.props.quantity,
       cost: this.props.cost,
       itemCost: this.props.itemCost
+    }
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.order !== prevProps.order){
+      this.setState({
+        title: this.props.itemTitle,
+        quantity: this.props.quantity,
+        cost:this.props.cost,
+        itemCost: this.props.itemCost
+      })
     }
   }
 
@@ -71,7 +83,6 @@ class ShopCard extends Component {
   remove(){
     if(this.state.quantity > 1){
       this.setState({quantity: --this.state.quantity})
-      console.log(this.state.cost, this.state.itemCost)
       this.props.update_cart(this.state.title, this.state.quantity, this.state.itemCost*this.state.quantity)
     }
 

@@ -10,6 +10,7 @@ import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
+import Cart from '../components/Cart.js'
 
 
 
@@ -20,9 +21,10 @@ const content = {
   };
 
 const button = {
-  width: 90,
-  height: 30,
-  marginLeft: 800,
+  bottom: 0,
+  width: 390,
+  height: 60,
+  marginLeft: 550,
   backgroundColor: '#FF8C00',
 }
 
@@ -52,8 +54,6 @@ class Home extends Component {
   }
 
 
-
-
     render() {
       return (
         <div style={{background:'#2C3539'}}>
@@ -66,39 +66,8 @@ class Home extends Component {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <GridList>
-                    <div style={{marginLeft: 600, height: 400}}>
-                      <ScrollArea
-                        speed={0.8}
-                        className="area"
-                        contentClassName="content"
-                        horizontal={false}
-                        style={{
-                          height: 400,
-                        }}>
-
-                        {this.props.order.map(item => (
-                          <div key={item.title}>
-                          <CardContent style={content}>
-                          <Typography component='h5' variant='h5'>
-                            {item.title}
-                          </Typography>
-                          <ShopCard
-                            itemTitle={item.title}
-                            quantity={item.quantity}
-                            itemCost = {item.itemCost}
-                            />
-                            <Typography component='h5' variant='h5'>
-                            {item.quantity}
-                            </Typography>
-                            <Typography>
-                              {item.totCost}
-                            </Typography>
-                          {console.log(this.props.order)}
-                          </CardContent>
-                          </div>
-                      ))}
-
-                      </ScrollArea>
+                    <div style={{marginLeft: 600, height: 740}}>
+                      <Cart />
                       </div>
                       <div>
                       <Button

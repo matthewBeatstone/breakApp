@@ -11,7 +11,29 @@ const reducer = (state = init_order, action) => {
   switch (action.type) {
 
     case 'ADD_ITEM':
-      return {...state, order: [...state.order, action.item]}
+      var exist = false
+      state.order.map(item =>{
+        if(item.title.localeCompare(action.item.title) === 0)
+          exist = true
+      })
+
+      if(exist){
+        return {
+          ...state,
+          order: state.order.map(item =>
+            item.title.localeCompare(action.item.title) === 0 ?
+            {...item,
+              quantity: item.quantity + action.item.quantity,
+              totCost: item.totCost+action.item.totCost,
+            }:
+            item
+          )
+        }
+      }
+      else{
+        return {...state, order: [...state.order, action.item]}
+      }
+
 
 
     case 'UPDATE_CART':

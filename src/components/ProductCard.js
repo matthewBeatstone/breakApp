@@ -93,7 +93,7 @@ export default class ProductCategories extends Component {
         horizontal={false}
         style={{
           width: 1500,
-          height: 865
+          height: 850
         }}
         >
         <div>

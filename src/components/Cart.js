@@ -1,8 +1,19 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
 import ScrollArea from 'react-scrollbar'
-import ShopCard from './ShopCard.js';
 import {connect} from 'react-redux'
+import ShopCard from '../components/ShopCard.js'
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+
+
+
+const content = {
+    flex: '1 0 auto',
+    background:'#FF8C00',
+    marginTop: 20,
+  };
 
 function mapStateToProps(state){
   return({
@@ -22,27 +33,57 @@ class Cart extends Component {
   }
 
 
-
   render(){
-    return(
-        <ScrollArea
-          speed={0.8}
-          className="area"
-          contentClassName="content"
-          horizontal={false}
+    if(this.props.order.length !== 0){
+      return(
+          <ScrollArea
+            speed={0.8}
+            className="area"
+            contentClassName="content"
+            horizontal={false}
+            >
 
-          >
-            {this.props.order.map(item =>{
+            {this.props.order.map(item => (
               <div key={item.title}>
-                  <ShopCard style={{maxWidth: 350}}itemTitle={item.title} />
+              <CardContent style={content}>
+              <Typography component='h5' variant='h5'>
+                {item.title}
+              </Typography>
+              <ShopCard
+                itemTitle={item.title}
+                quantity={item.quantity}
+                itemCost = {item.itemCost}
+                />
+                <Typography component='h5' variant='h5'>
+                {item.quantity}
+                </Typography>
+                <Typography>
+                  {item.totCost} €
+                </Typography>
+              {console.log(this.props.order)}
+              </CardContent>
               </div>
-            }
+          ))}
+          </ScrollArea>
+      )
+    }
+    else{
+      return(
+          <div>
+            <Typography component='h5' variant={'h5'} style={{marginTop:310, color:'#FFF'}}>
+              Il carrello e' vuoto,
+             </Typography>
+             <Typography component='h7' variant={'h7'} style={{marginTop:5, color: '#FFF'}}>
+               Per ordinare selezionare un articolo  e premere "aggiungi"
+              </Typography>
 
-            )}
+               <div>
+             <ShoppingCartOutlinedIcon style={{alignItems:'center', marginTop: 50, fontSize: 80, color: '#FF8C00'}} />
+             </div>
+          </div>
+      )
+    }
 
-
-        </ScrollArea>
-    )
   }
 }
 
