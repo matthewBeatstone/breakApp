@@ -97,12 +97,12 @@ class ShopCard extends Component {
               <IconButton
                 aria-label="previous"
                 onClick={this.remove.bind(this)}>
-               <RemoveCircleRoundedIcon />
+               <RemoveCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
             <IconButton aria-label="next" onClick={this.add.bind(this)}>
-              <AddCircleRoundedIcon />
+              <AddCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
-            <HighlightOffTwoToneIcon onClick={() => this.props.remove_item(this.state.title)}/>
+            <HighlightOffTwoToneIcon style = {{fontSize:40, marginLeft:30}}onClick={() => this.props.remove_item(this.state.title)}/>
           </div>
         </div>
     </div>

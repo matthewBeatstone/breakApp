@@ -35,8 +35,12 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: 'http://127.0.0.1:5000'
+      endpoint: 'http://127.0.0.1:5000',
+      tot: '',
+      buttonText: 'ORDINA'
     }
+
+
   }
 
   order(){
@@ -51,6 +55,17 @@ class Home extends Component {
           order: this.props.order
         }),
       })
+  }
+
+
+  componentDidUpdate(prevProps){
+    if(this.props.order !== prevProps.order){
+      var t = 0;
+      for (var i = 0; i < this.props.order.length; i++) {
+        t += this.props.order[i].totCost
+      }
+      this.setState({tot: t + '€'})
+    }
   }
 
 
@@ -75,8 +90,9 @@ class Home extends Component {
                       color="primary"
                       style={button}
                       onClick={this.order.bind(this)}
+                      disabled={true}
                       >
-                        Ordina
+                        <Typography style={{color: 'black'}} content={'h6'} variant='h6'> {'ORDINA' + '    ' + this.state.tot}  </Typography>
                       </Button>
                       </div>
                 </GridList>

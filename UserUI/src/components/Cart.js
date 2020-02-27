@@ -13,6 +13,7 @@ const content = {
     flex: '1 0 auto',
     background:'#FF8C00',
     marginTop: 20,
+    borderRadius: 20
   };
 
 function mapStateToProps(state){
@@ -49,11 +50,13 @@ class Cart extends Component {
               <Typography component='h5' variant='h5'>
                 {item.title}
               </Typography>
+              <div style={{marginLeft: 70}} >
               <ShopCard
                 itemTitle={item.title}
                 quantity={item.quantity}
                 itemCost = {item.itemCost}
                 />
+              </div>
                 <Typography component='h5' variant='h5'>
                 {item.quantity}
                 </Typography>
