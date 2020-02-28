@@ -13,7 +13,11 @@ const initCashdesk ={
 const reducer = (state = initCashdesk, action) => {
   switch (action.type) {
     case 'ADD_ORDER':
-      return state
+        return {
+          ...state,
+          cashdesk: [...state.cashdesk, action.order]
+        }
+
   }
   return state
 }

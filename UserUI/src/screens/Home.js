@@ -37,7 +37,8 @@ class Home extends Component {
     this.state = {
       endpoint: 'http://127.0.0.1:5000',
       tot: '',
-      buttonText: 'ORDINA'
+      buttonText: 'ORDINA',
+      disableButton: false
     }
 
 
@@ -65,6 +66,9 @@ class Home extends Component {
         t += this.props.order[i].totCost
       }
       this.setState({tot: t + '€'})
+      if(this.props.order.length > 0){
+        this.setState({disableButton: true})
+      }
     }
   }
 
@@ -90,9 +94,9 @@ class Home extends Component {
                       color="primary"
                       style={button}
                       onClick={this.order.bind(this)}
-                      disabled={true}
+                      disabled={!this.state.disableButton}
                       >
-                        <Typography style={{color: 'black'}} content={'h6'} variant='h6'> {'ORDINA' + '    ' + this.state.tot}  </Typography>
+                        <Typography style={{color: 'black'}} content={'h6'} variant='h6'> {'ORDINA' + ' ' + this.state.tot}  </Typography>
                       </Button>
                       </div>
                 </GridList>
