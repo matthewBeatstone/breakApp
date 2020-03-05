@@ -15,7 +15,7 @@ const reducer = (state = initCashdesk, action) => {
     case 'ADD_ORDER':
         return {
           ...state,
-          cashdesk: [...state.cashdesk, action.order]
+          cashdesk: [action.order, ...state.cashdesk]
         }
 
   }

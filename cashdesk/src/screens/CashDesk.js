@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import OrderCard from '../components/OrderCard.js'
 import {connect} from 'react-redux'
-
+import socketIOClient from "socket.io-client";
+import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
 function mapStateToProps(state){
   return{
@@ -15,40 +17,51 @@ function mapDispatchToProps(dispatch){
   }
 }
 
+const content = {
+    flex: '1 0 auto',
+    background:'#FF8C00',
+    marginTop: 20,
+    borderRadius: 20,
+    flexDirection: 'column'
+  };
 
 class CashDesk extends Component{
 
   constructor(props){
     super(props);
     this.state = {
-      source: new EventSource('http://127.0.0.1:5000/cashdesk'),
-      messages: ['ciao']
-  }
+      data: '',
+      socket: socketIOClient('http://127.0.0.1:8080')
+    }
+
 }
 
   componentDidMount () {
-    const { source, messages } = this.state
-    source.addEventListener('order', message => {
-        console.log(message.id)
-        var m = JSON.parse(message.data)
-        console.log(m)
-        m.map(item => {
-          this.props.add_order(item)
-        })
+    const socket = this.state.socket
+    socket.on('order', (order) => {
+      console.log(order)
+      this.props.add_order(order)
     })
-    console.log(this.state.messages)
   }
 
   render(){
-
+    console.log(this.props.cashdesk)
     return(
-      <div>
-        {this.props.cashdesk.map(item =>
-          <OrderCard title={item.title} />
-        )}
-        {console.log(this.props.chashdesk)}
-      </div>
-    )
+      this.props.cashdesk.map(order =>
+        <CardContent style={content}>
+          {order.map(item =>
+            <div key={item.title}>
+              <Typography component='h5' variant='h5'>
+                {item.quantity + ' '} {item.title}
+              </Typography>
+                <Typography>
+                  {item.totCost} €
+                </Typography>
+            </div>
+          )
+        }
+        </CardContent>
+    ))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CashDesk)

@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Cart from '../components/Cart.js'
-
+import io from 'socket.io-client'
 
 
 const content = {
@@ -35,7 +35,7 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: 'http://127.0.0.1:5000',
+      endpoint: 'http://192.168.1.108:5000',
       tot: '',
       buttonText: 'ORDINA',
       disableButton: false
@@ -44,18 +44,9 @@ class Home extends Component {
 
   }
 
-  order(){
-    fetch('http://127.0.0.1:5000/order', {
-
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          },
-        body: JSON.stringify({
-          order: this.props.order
-        }),
-      })
+  send_order = () => {
+    const socket = io('http://127.0.0.1:8080');
+    socket.emit('take_order', this.props.order)
   }
 
 
@@ -93,7 +84,7 @@ class Home extends Component {
                       variant="contained"
                       color="primary"
                       style={button}
-                      onClick={this.order.bind(this)}
+                      onClick={this.send_order}
                       disabled={!this.state.disableButton}
                       >
                         <Typography style={{color: 'black'}} content={'h6'} variant='h6'> {'ORDINA' + ' ' + this.state.tot}  </Typography>

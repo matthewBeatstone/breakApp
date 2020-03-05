@@ -1,51 +1,79 @@
 import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+import ReactDOM from 'react-dom'
+import ScrollArea from 'react-scrollbar'
+import {connect} from 'react-redux'
 import Typography from '@material-ui/core/Typography';
+import CardContent from '@material-ui/core/CardContent';
 
-const root = {
-  width: '100%',
-  background: 'orange'
-};
-const bullet = {
-  display: 'inline-block',
-  margin: '0 2px',
-  transform: 'scale(0.8)',
-};
-const title = {
-  fontSize: 30,
-  alignSelf: 'center'
-};
-const pos = {
-  fontsize:30
 
+
+const content = {
+    flex: '1 0 auto',
+    background:'#FF8C00',
+    marginTop: 20,
+    borderRadius: 20
+  };
+
+function mapStateToProps(state){
+  return{
+    cashdesk: state.cashdesk
+  }
 }
-;
 
-export default class OrderCard extends Component {
 
+class OrderCard extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      modalStatede : false,
+    }
   }
 
   render(){
-    return (
-      <Card style={root}>
-        <CardContent>
-          <Typography style={title} color="textSecondary" gutterBottom>
-            {this.props.title}
-          </Typography>
-          <Typography variant="h5" component="h5">
-            {this.props.quantity}
-          </Typography>
-          <Typography style={pos} color="textSecondary">
-            {this.props.totCost}
-          </Typography>
-        </CardContent>
+    if(this.props.cashdesk.length !== 0){
+      return(
+          <ScrollArea
+            speed={0.8}
+            className="area"
+            contentClassName="content"
+            horizontal={false}
+            >
+            {this.props.cashdesk.map(order => (
+              order.map(item => (
+                <div key={item.title}>
+                <CardContent style={content}>
+                <Typography component='h5' variant='h5'>
+                  {item.title}
+                </Typography>
 
-      </Card>
-    );
+                  <Typography component='h5' variant='h5'>
+                  {item.quantity}
+                  </Typography>
+                  <Typography>
+                    {item.totCost} €
+                  </Typography>
+                {console.log(this.props.order)}
+                </CardContent>
+                </div>
+            ))
+          ))}
+          </ScrollArea>
+      )
+    }
+    else{
+      return(
+          <div>
+            <Typography component='h5' variant={'h5'} style={{marginTop:310, color:'#FFF'}}>
+              Il carrello e' vuoto,
+             </Typography>
+             <Typography component='h7' variant={'h7'} style={{marginTop:5, color: '#FFF'}}>
+               Per ordinare selezionare un articolo  e premere "aggiungi"
+              </Typography>
+          </div>
+      )
+    }
+
   }
 }
+
+export default connect(mapStateToProps)(OrderCard)
