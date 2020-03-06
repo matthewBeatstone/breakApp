@@ -49,7 +49,7 @@ class CashDesk extends Component{
     return(
       this.props.cashdesk.map(order =>
         <CardContent style={content}>
-          {order.map(item =>
+          {order.order.map(item =>
             <div key={item.title}>
               <Typography component='h5' variant='h5'>
                 {item.quantity + ' '} {item.title}
