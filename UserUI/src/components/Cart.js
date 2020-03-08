@@ -48,7 +48,7 @@ class Cart extends Component {
               <div key={item.title}>
               <CardContent style={content}>
               <Typography component='h5' variant='h5'>
-                {item.title}
+                {item.quantity + '' +item.title}  
               </Typography>
               <div style={{marginLeft: 70}} >
               <ShopCard
@@ -57,12 +57,6 @@ class Cart extends Component {
                 itemCost = {item.itemCost}
                 />
               </div>
-                <Typography component='h5' variant='h5'>
-                {item.quantity}
-                </Typography>
-                <Typography>
-                  {item.totCost} €
-                </Typography>
               {console.log(this.props.order)}
               </CardContent>
               </div>

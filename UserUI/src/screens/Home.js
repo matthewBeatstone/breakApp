@@ -35,7 +35,6 @@ class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      endpoint: 'http://192.168.1.108:5000',
       tot: '',
       buttonText: 'ORDINA',
       disableButton: false
@@ -46,7 +45,7 @@ class Home extends Component {
 
   send_order = () => {
     const socket = io('http://127.0.0.1:8080');
-    socket.emit('take_order', this.props.order)
+    socket.emit('table2', this.props.order)
   }
 
 

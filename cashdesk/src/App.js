@@ -18,6 +18,14 @@ const reducer = (state = initCashdesk, action) => {
           cashdesk: [action.order, ...state.cashdesk]
         }
 
+    case 'REMOVE_ITEM':
+      return {
+        ...state,
+        cashdesk: state.cashdesk.filter(order =>
+          order.id.localeCompare(action.id) !==0
+        )
+      }
+
   }
   return state
 }
