@@ -4,6 +4,9 @@ import {connect} from 'react-redux'
 import socketIOClient from "socket.io-client";
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
+import ScrollArea from 'react-scrollbar'
+import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
+
 
 function mapStateToProps(state){
   return{
@@ -53,6 +56,7 @@ class CashDesk extends Component{
 
   getTotal(order){
     var tot = 0
+
     for (var i = 0; i < order.length; i++) {
       tot+=order[i].totCost
     }
@@ -62,8 +66,15 @@ class CashDesk extends Component{
   render(){
     console.log(this.props.cashdesk)
     return(
+      <ScrollArea
+        speed={0.8}
+        className="area"
+        contentClassName="content"
+        horizontal={false}
+        >
       <div style={container}>
       {this.props.cashdesk.map(order =>
+        <div key={order.id}>
         <CardContent style={content}>
           <Typography component='h4' variant='h4'>
             {'tavolo  ' + order.table}
@@ -80,9 +91,11 @@ class CashDesk extends Component{
         {this.getTotal(order.order) + '€'}
         </Typography>
         </CardContent>
+        </div>
     )
   }
   </div>
+  </ScrollArea>
 )
 }
 }

@@ -9,7 +9,8 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import ScrollArea from 'react-scrollbar';
 import Grid from '@material-ui/core/Grid';
-import Beer from './Beer.js'
+import Beer from './products/Beer.js'
+import Coffe from './products/Coffe.js'
 
 const card = {
   maxWidth: 345,
@@ -26,8 +27,8 @@ const modal = {
 };
 
 const modalContainer = {
-    width: 400,
-    height: 800
+    width: 600,
+    height: 700
 };
 
 const cardContainer = {
@@ -38,27 +39,61 @@ const cardContainer = {
 
 
 class ProductCard extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      modalState: false
+    }
+  }
+  openModal(){
+    this.setState({modalState: true})
+  }
+  closeModal(){
+    this.setState({modalState: false})
+  }
 
   render(){
     return (
-      <Card style={card}>
-        <CardActionArea>
-          <CardMedia
-            style={media}
-            image={this.props.pic}
-            title="categoryImage"
-          />
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {this.props.title}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              subtitle
-            </Typography>
-          </CardContent>
-        </CardActionArea>
+      <div>
+      <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+        <Card style={card}>
+          <CardActionArea>
+            <CardMedia
+              style={media}
+              image={this.props.pic}
+              title="categoryImage"
+            />
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="h2">
+                {this.props.title}
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                subtitle
+              </Typography>
+            </CardContent>
+          </CardActionArea>
 
-      </Card>
+        </Card>
+      </button>
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        style={modal}
+        open={this.state.modalState}
+        onClose={this.closeModal.bind(this)}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 1000,
+        }}
+      >
+        <Fade in={this.state.modalState}>
+          <div style={modalContainer}>
+            {this.props.productsItems}
+          </div>
+        </Fade>
+      </Modal>
+      </div>
     );
   }
 }
@@ -99,59 +134,27 @@ export default class ProductCategories extends Component {
         <div>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-              <ProductCard title={'birra'} pic={this.beerImg}/>
-              </button>
-                    <Modal
-                      aria-labelledby="transition-modal-title"
-                      aria-describedby="transition-modal-description"
-                      style={modal}
-                      open={this.state.modalState}
-                      onClose={this.closeModal.bind(this)}
-                      closeAfterTransition
-                      BackdropComponent={Backdrop}
-                      BackdropProps={{
-                        timeout: 1000,
-                      }}
-                    >
-                      <Fade in={this.state.modalState}>
-                        <div style={modalContainer}>
-                          <Beer />
-                        </div>
-                      </Fade>
-                    </Modal>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Coffe />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>            </Grid>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+            </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>            </Grid>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+            </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>            </Grid>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+            </Grid>
             <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>            </Grid>
-            <Grid item xs={12} sm={6}>
-            <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
-            <ProductCard title={'birra'} pic={this.beerImg}/>
-            </button>
-             </Grid>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+            </Grid>
+
             </Grid>
       </div>
     </ScrollArea>

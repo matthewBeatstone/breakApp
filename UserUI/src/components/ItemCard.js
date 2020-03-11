@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import Button from '@material-ui/core/Button';
+
 import {connect} from 'react-redux';
 
 
@@ -27,6 +28,7 @@ function mapDispatchToProps(dispatch){
 
 const card = {
     display: 'flex',
+    flexDirection:'row'
   };
 const details = {
     display: 'flex',
@@ -35,11 +37,12 @@ const details = {
 
 const content = {
     flex: '1 0 auto',
+    borderRadius: 30
   };
 const cover = {
-    width: 400,
+    width: 150,
     height: 150,
-    marginLeft: 150
+
 
   };
 const controls = {
@@ -49,9 +52,10 @@ const controls = {
   };
 
 const button = {
-  width: 90,
-  height: 30,
+  width: 110,
+  height: 50,
   backgroundColor: '#FF8C00',
+  borderRadius:30
 }
 
 
@@ -81,29 +85,34 @@ class ItemCard extends Component {
   render(){
     return (
       <Card style={card}>
+      <CardMedia
+        style={cover}
+        image={this.props.itemPic}
+        title="itemPic"
+      />
         <div style={details}>
           <CardContent style={content}>
             <Typography component="h5" variant="h5">
               {this.props.itemTitle}
             </Typography>
             <Typography component="h5" variant="h5">
-              {this.props.itemCost}
+              {this.props.itemCost + '€'}
             </Typography>
           </CardContent>
           <div style={controls}>
             <IconButton aria-label="previous" onClick={this.removeItem.bind(this)}>
-               <RemoveCircleRoundedIcon />
+               <RemoveCircleRoundedIcon style={{fontSize:35}} />
             </IconButton>
-            <h3> {this.state.quantity} </h3>
+            <h2> {this.state.quantity} </h2>
             <IconButton aria-label="next" onClick={this.addItem.bind(this)}>
-              <AddCircleRoundedIcon />
+              <AddCircleRoundedIcon style={{fontSize:35}}/>
             </IconButton>
             <Button
             variant="contained"
             color="primary"
             style={button}
             onClick={() => this.props.add_item({
-              title: this.state.title,
+              title: this.props.itemTitle,
               quantity: this.state.quantity,
               totCost: this.state.itemCost*this.state.quantity,
               itemCost: this.state.itemCost
@@ -114,11 +123,6 @@ class ItemCard extends Component {
           </div>
         </div>
 
-        <CardMedia
-          style={cover}
-          image={this.props.itemPic}
-          title="itemPic"
-        />
       </Card>
     );
   }

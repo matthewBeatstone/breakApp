@@ -67,7 +67,7 @@ class Home extends Component {
       return (
         <div style={{background:'#2C3539'}}>
             <Header />
-            <div>
+            <div style={{marginTop:30}}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <ProductCategories />
@@ -75,7 +75,7 @@ class Home extends Component {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                 <GridList>
-                    <div style={{marginLeft: 600, height: 740}}>
+                    <div style={{marginLeft: 600, height: 800}}>
                       <Cart />
                       </div>
                       <div>
@@ -86,7 +86,7 @@ class Home extends Component {
                       onClick={this.send_order}
                       disabled={!this.state.disableButton}
                       >
-                        <Typography style={{color: 'black'}} content={'h6'} variant='h6'> {'ORDINA' + ' ' + this.state.tot}  </Typography>
+                        <Typography style={{color: 'black', bottom:0}} content={'h6'} variant='h6'> {'ORDINA' + ' ' + this.state.tot}  </Typography>
                       </Button>
                       </div>
                 </GridList>
