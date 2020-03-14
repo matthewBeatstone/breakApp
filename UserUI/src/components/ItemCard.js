@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import Button from '@material-ui/core/Button';
-
 import {connect} from 'react-redux';
 
 
@@ -42,6 +41,7 @@ const content = {
 const cover = {
     width: 150,
     height: 150,
+    borderRadius:100
 
 
   };
@@ -85,11 +85,13 @@ class ItemCard extends Component {
   render(){
     return (
       <Card style={card}>
+      <div>
       <CardMedia
         style={cover}
         image={this.props.itemPic}
         title="itemPic"
       />
+      </div>
         <div style={details}>
           <CardContent style={content}>
             <Typography component="h5" variant="h5">
@@ -114,7 +116,7 @@ class ItemCard extends Component {
             onClick={() => this.props.add_item({
               title: this.props.itemTitle,
               quantity: this.state.quantity,
-              totCost: this.state.itemCost*this.state.quantity,
+              totCost:   ((this.state.itemCost*10)*this.state.quantity)/10,
               itemCost: this.state.itemCost
             })}>
 

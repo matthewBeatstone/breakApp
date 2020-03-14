@@ -53,9 +53,10 @@ class Home extends Component {
     if(this.props.order !== prevProps.order){
       var t = 0;
       for (var i = 0; i < this.props.order.length; i++) {
-        t += this.props.order[i].totCost
+        t += (this.props.order[i].totCost * 10)
+        console.log(t)
       }
-      this.setState({tot: t + '€'})
+      this.setState({tot: t/10 + '€'})
       if(this.props.order.length > 0){
         this.setState({disableButton: true})
       }

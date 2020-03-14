@@ -55,14 +55,6 @@ const reducer = (state = init_order, action) => {
         )
       }
 
-    case 'GET_TOTAL':
-      var total
-      state.order.map(item =>{
-        total += item.totCost
-      })
-      console.log(total)
-      return total
-
   }
   return state
 }

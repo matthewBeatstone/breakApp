@@ -18,7 +18,6 @@ const content = {
 
 function mapStateToProps(state){
   return({
-    catalog: state.catalog,
     order: state.order
   })
 }
@@ -43,12 +42,11 @@ class Cart extends Component {
             contentClassName="content"
             horizontal={false}
             >
-
             {this.props.order.map(item => (
               <div key={item.title}>
               <CardContent style={content}>
               <Typography component='h5' variant='h5'>
-                {item.quantity + '' +item.title}  
+                {item.quantity + ' ' +item.title}
               </Typography>
               <div style={{marginLeft: 70}} >
               <ShopCard

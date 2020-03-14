@@ -108,6 +108,7 @@ export default class ProductCategories extends Component {
     }
 
     this.beerImg = require('../assets/images/beer.jpg')
+    this.coffeImg = require('../assets/images/coffe.jpeg')
   }
 
   openModal(){
@@ -137,7 +138,7 @@ export default class ProductCategories extends Component {
               <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Coffe />} />
+              <ProductCard title={'Caffetteria'} pic={this.coffeImg} productsItems={<Coffe />} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />

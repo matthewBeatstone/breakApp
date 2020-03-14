@@ -31,7 +31,7 @@ export default class Beer extends Component {
 
     this.blondeBeer20 = {
       title : 'Chiara alla spina (20 cl.) ',
-      cost: 3.,
+      cost: 3,
       img: require('../../assets/images/spinaChiara.png'),
     };
     this.blondeBeer40 = {
