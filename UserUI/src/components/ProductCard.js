@@ -11,6 +11,7 @@ import ScrollArea from 'react-scrollbar';
 import Grid from '@material-ui/core/Grid';
 import Beer from './products/Beer.js'
 import Coffe from './products/Coffe.js'
+import Sodas from './products/Sodas.js'
 
 const card = {
   maxWidth: 345,
@@ -109,6 +110,7 @@ export default class ProductCategories extends Component {
 
     this.beerImg = require('../assets/images/beer.jpg')
     this.coffeImg = require('../assets/images/coffe.jpeg')
+    this.sodasImg = require('../assets/images/sodas.jpg')
   }
 
   openModal(){
@@ -141,7 +143,7 @@ export default class ProductCategories extends Component {
               <ProductCard title={'Caffetteria'} pic={this.coffeImg} productsItems={<Coffe />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+              <ProductCard title={'Bibite'} pic={this.sodasImg} productsItems={<Sodas />} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />

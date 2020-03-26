@@ -64,7 +64,7 @@ class ItemCard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      quantity: 0,
+      quantity: 1,
       title : this.props.itemTitle,
       itemCost : this.props.itemCost,
     }
@@ -75,11 +75,8 @@ class ItemCard extends Component {
     this.setState({quantity: this.state.quantity+1})
   }
   removeItem(){
-    if(this.state.quantity > 0)
+    if(this.state.quantity > 1)
       this.setState({quantity: this.state.quantity-1})
-
-
-
   }
 
   render(){
@@ -116,8 +113,8 @@ class ItemCard extends Component {
             onClick={() => this.props.add_item({
               title: this.props.itemTitle,
               quantity: this.state.quantity,
-              totCost:   ((this.state.itemCost*10)*this.state.quantity)/10,
-              itemCost: this.state.itemCost
+              totCost:   ((this.props.itemCost*10)*this.state.quantity)/10,
+              itemCost: this.props.itemCost
             })}>
 
               Aggiungi

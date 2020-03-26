@@ -58,9 +58,9 @@ class CashDesk extends Component{
     var tot = 0
 
     for (var i = 0; i < order.length; i++) {
-      tot+=order[i].totCost
+      tot+=order[i].totCost*10
     }
-    return tot
+    return tot/10
   }
 
   render(){

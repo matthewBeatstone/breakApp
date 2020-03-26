@@ -15,137 +15,20 @@ const content = {
   };
 
 
-class CoffeCard extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      title: this.props.itemTitle
-    }
-  }
-
-  openModal(){
-    this.setState({modalState: true})
-  }
-  closeModal(){
-    this.setState({modalState: false})
-  }
-
-  undo(){
-    if(this.state.title.localeCompare(this.props.itemTitle) !== 0){
-      const title = this.state.title.split(" ")
-      var newTitle = []
-      for (var i = 0; i < title.length-1; i++) {
-        newTitle.push(title[i])
-      }
-      console.log(newTitle)
-      this.setState({title: newTitle.join(" ")})
-    }
-
-  }
-
-
-  render(){
-    return(
-      <div>
-      <Card >
-        <CardContent>
-        <ItemCard  itemTitle={this.state.title} itemCost={this.props.itemCost} itemPic={this.props.itemPic} />
-        <IconButton onClick={this.undo.bind(this)}>
-        <UndoIcon/>
-        </IconButton>
-        <div style={{flexDirection:'column'}}>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' corretto'})}
-            name="radio-button-demo"
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Corretto
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' decaffeinato'})}
-            name="radio-button-demo"
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Decaffeinato
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' marocchino'})}
-            name="radio-button-demo"
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Marocchino
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' orzo'})}
-            name="radio-button-demo"
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Orzo
-          </Typography>
-
-          <div style={{alignItems:'center'}}>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' gingseng'})}
-            name="radio-button-demo"
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Gingseng
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + ' americano'})}
-            name="radio-button-demo"
-            style={{marginLeft: 21}}
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Americano
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + 'shakerato'})}
-            name="radio-button-demo"
-            style={{marginLeft: 21}}
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Shackerato
-          </Typography>
-          <Radio
-            onChange={() => this.setState({title: this.state.title + 'latte'})}
-            name="radio-button-demo"
-            style={{marginLeft: 21}}
-            color='default'
-            />
-          <Typography component='h7' variant='h6'>
-            Latte
-          </Typography>
-          </div>
-        </div>
-
-      </CardContent>
-      </Card>
-      </div>
-    )
-  }
-}
-
 export default class Coffe extends Component {
   constructor(props){
     super(props);
     this.state = {
-      modalState : false
+      modalState : false,
+      coffeTitle: 'Caffe ',
+      coffeCost: 0
     }
-
-
     this.caffe = {
       title: 'Caffe',
       cost: 1.1,
       img: require('../../assets/images/tazzina.jpeg'),
-  }
+    }
+
     this.cappuccino = {
       title: 'Cappuccino',
       cost: 1.6,
@@ -157,9 +40,77 @@ export default class Coffe extends Component {
       cost: 3.5,
       img: require('../../assets/images/cioccolata.jpg')
     }
+    this.coffeTitle = this.caffe.title
+    this.state.coffeCost = this.caffe.cost
+  }
 
 
-}
+  addCoffeType(type){
+    switch (type) {
+      case 'corretto':
+          this.setState({coffeTitle: this.state.coffeTitle + ' corretto', coffeCost: this.state.coffeCost+0.5})
+        break;
+      case 'decaffeinato':
+        this.setState({coffeTitle: this.state.coffeTitle + ' decaffeinato'})
+        break;
+      case 'marocchino':
+        this.setState({coffeTitle: this.state.coffeTitle + ' marocchino', coffeCost: this.state.coffeCost+0.9})
+        break;
+      case 'orzo':
+        this.setState({coffeTitle: this.state.coffeTitle + ' orzo', coffeCost: this.state.coffeCost+0.5})
+        break;
+      case 'gingseng':
+        this.setState({coffeTitle: this.state.coffeTitle + ' gingseng', coffeCost: this.state.coffeCost+0.5})
+        break;
+      case 'americano':
+        this.setState({coffeTitle: this.state.coffeTitle + ' americano'})
+        break;
+      case 'latte':
+        this.setState({coffeTitle: this.state.coffeTitle + ' latte', coffeCost: (this.state.coffeCost*10+0.3*10)/10})
+        break;
+    }
+  }
+
+  undo(){
+    if(this.state.coffeTitle.localeCompare(this.caffe.title) !== 0){
+      const title = this.state.coffeTitle.split(" ")
+      var newTitle = []
+      var newCost = 0
+      for (var i = 0; i < title.length-1; i++) {
+        if(title[i].localeCompare("") !== 0)
+          newTitle.push(title[i])
+      }
+      console.log(newTitle.length)
+      if(newTitle.length > 1){
+        this.state.coffeCost = this.caffe.cost
+        for (var i = 0; i < newTitle.length; i++) {
+          console.log(newTitle[i])
+          switch (newTitle[i]) {
+            case 'corretto':
+                this.setState({coffeCost: this.state.coffeCost+0.5})
+                break;
+            case 'marocchino':
+              this.setState({coffeCost: this.state.coffeCost+0.9})
+              break;
+            case 'orzo':
+              this.setState({coffeCost: this.state.coffeCost+0.5})
+              break;
+            case 'gingseng':
+              this.setState({coffeCost: this.state.coffeCost+0.5})
+              break;
+            case 'latte':
+              this.setState({coffeCost: (this.state.coffeCost*10+0.3*10)/10})
+              break;
+          }
+        }
+      }
+      else{
+        this.setState({coffeCost: this.caffe.cost})
+      }
+      console.log(newTitle)
+      this.setState({coffeTitle: newTitle.join(" ")})
+    }
+  }
 
   render(){
     return(
@@ -173,7 +124,81 @@ export default class Coffe extends Component {
             borderRadius:30
           }}
           >
-          <CoffeCard  itemTitle={this.caffe.title} itemCost={this.caffe.cost} itemPic={this.caffe.img} />
+          <div>
+          <Card >
+            <CardContent>
+            <ItemCard  itemTitle={this.state.coffeTitle} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
+            <IconButton onClick={this.undo.bind(this)}>
+            <UndoIcon/>
+            </IconButton>
+            <div style={{flexDirection:'column'}}>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'corretto')}
+                name="radio-button-demo"
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Corretto
+              </Typography>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'decaffeinato')}
+                name="radio-button-demo"
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Decaffeinato
+              </Typography>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'marocchino')}
+                name="radio-button-demo"
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Marocchino
+              </Typography>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'orzo')}
+                name="radio-button-demo"
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Orzo
+              </Typography>
+
+              <div style={{alignItems:'center'}}>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'gingseng')}
+                name="radio-button-demo"
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Gingseng
+              </Typography>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'americano')}
+                name="radio-button-demo"
+                style={{marginLeft: 21}}
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Americano
+              </Typography>
+              <Radio
+                onChange={this.addCoffeType.bind(this, 'latte')}
+                name="radio-button-demo"
+                style={{marginLeft: 21}}
+                color='default'
+                />
+              <Typography component='h7' variant='h6'>
+                Latte
+              </Typography>
+              </div>
+            </div>
+
+          </CardContent>
+          </Card>
+          </div>
+
           <ItemCard itemTitle={this.cappuccino.title} itemCost={this.cappuccino.cost} itemPic={this.cappuccino.img} />
           <ItemCard itemTitle={this.cioccolata.title} itemCost={this.cioccolata.cost} itemPic={this.cioccolata.img} />
 
