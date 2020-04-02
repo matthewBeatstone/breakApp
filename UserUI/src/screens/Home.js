@@ -12,7 +12,15 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Cart from '../components/Cart.js'
 import io from 'socket.io-client'
+import Checkout from '../components/Checkout.js';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
 
+const modal = {
+  display: 'flex',
+  alignItems:'center',
+  justifyContent: 'center',
+};
 
 const content = {
     flex: '1 0 auto',
@@ -21,11 +29,20 @@ const content = {
   };
 
 const button = {
-  bottom: 0,
   width: 390,
   height: 60,
-  marginLeft: 550,
+  borderRadius: 40,
   backgroundColor: '#FF8C00',
+}
+const modalContainer = {
+    width: 1000,
+    height: 700,
+    backgroundColor: '#2C3539'
+};
+
+const summary = {
+  witdh: 500,
+  heigh: 400
 }
 
 
@@ -37,7 +54,8 @@ class Home extends Component {
     this.state = {
       tot: '',
       buttonText: 'ORDINA',
-      disableButton: false
+      disableButton: false,
+      modalState: false
     }
 
 
@@ -47,6 +65,14 @@ class Home extends Component {
     const socket = io('http://127.0.0.1:8080');
     socket.emit('table2', this.props.order)
   }
+
+  openModal(){
+    this.setState({modalState: true})
+  }
+  closeModal(){
+    this.setState({modalState: false})
+  }
+
 
 
   componentDidUpdate(prevProps){
@@ -64,38 +90,26 @@ class Home extends Component {
   }
 
 
+
+
     render() {
       return (
-        <div style={{background:'#2C3539'}}>
-            <Header />
-            <div style={{marginTop:30}}>
-            <Grid container spacing={2}>
+        <div style={{background:'#2C3539', width:'100%' ,height:'100%'}}>
+          <Header />
+          <div style={{marginTop:10}}>
+            <Grid container spacing={3}>
               <Grid item xs={12} sm={6}>
                 <ProductCategories />
-
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                <GridList>
-                    <div style={{marginLeft: 600, height: 800}}>
-                      <Cart />
+                  <Grid item xs={12} sm={6}>
+                    <div style={{marginLeft: 400, width:'50%'}}>
+                        <Cart />
                       </div>
-                      <div>
-                      <Button
-                      variant="contained"
-                      color="primary"
-                      style={button}
-                      onClick={this.send_order}
-                      disabled={!this.state.disableButton}
-                      >
-                        <Typography style={{color: 'black', bottom:0}} content={'h6'} variant='h6'> {'ORDINA' + ' ' + this.state.tot}  </Typography>
-                      </Button>
-                      </div>
-                </GridList>
-                </Grid>
+                   </Grid>
                 </Grid>
               </div>
+            </div>
 
-        </div>
     );
   }
 }

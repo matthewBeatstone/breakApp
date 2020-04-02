@@ -12,6 +12,8 @@ import Grid from '@material-ui/core/Grid';
 import Beer from './products/Beer.js'
 import Coffe from './products/Coffe.js'
 import Sodas from './products/Sodas.js'
+import Cocktail from './products/Cocktail.js';
+import Zoom from 'react-reveal/Zoom';
 
 const card = {
   maxWidth: 345,
@@ -76,6 +78,7 @@ class ProductCard extends Component {
 
         </Card>
       </button>
+
       <Modal
         aria-labelledby="transition-modal-title"
         aria-describedby="transition-modal-description"
@@ -92,6 +95,7 @@ class ProductCard extends Component {
           <div style={modalContainer}>
             {this.props.productsItems}
           </div>
+
         </Fade>
       </Modal>
       </div>
@@ -111,6 +115,9 @@ export default class ProductCategories extends Component {
     this.beerImg = require('../assets/images/beer.jpg')
     this.coffeImg = require('../assets/images/coffe.jpeg')
     this.sodasImg = require('../assets/images/sodas.jpg')
+    this.cocktailImg = require('../assets/images/cocktail.jpg')
+    this.dolciImg = require('../assets/images/dolci.jpg')
+    this.amariImg = require('../assets/images/amari.jpg')
   }
 
   openModal(){
@@ -130,14 +137,14 @@ export default class ProductCategories extends Component {
         contentClassName="content"
         horizontal={false}
         style={{
-          width: 1500,
-          height: 850
+          width: 1200,
+          height: 894
         }}
         >
         <div>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+              <ProductCard title={'Birra'} pic={this.beerImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'Caffetteria'} pic={this.coffeImg} productsItems={<Coffe />} />
@@ -146,13 +153,13 @@ export default class ProductCategories extends Component {
               <ProductCard title={'Bibite'} pic={this.sodasImg} productsItems={<Sodas />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+              <ProductCard title={'Cocktail'} pic={this.cocktailImg} productsItems={<Cocktail />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+              <ProductCard title={'Brioches e Dolci'} pic={this.dolciImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
+              <ProductCard title={'Amari'} pic={this.amariImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />

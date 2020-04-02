@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
+import LightSpeed from 'react-reveal/LightSpeed';
 
 
 import {connect} from 'react-redux';
@@ -19,13 +20,11 @@ const details = {
 const content = {
     flex: '1 0 auto',
     background:'#FF8C00',
-    marginTop: 20
   };
 
 const controls = {
     display: 'flex',
     alignItems: 'center',
-    marginLeft:20
   };
 
 
