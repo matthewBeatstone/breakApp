@@ -24,7 +24,7 @@ const content = {
   background:'#FF8C00',
   marginTop: 20,
   borderRadius: 100,
-  height: 70,
+  height: 80,
   flexDirection:'column'
 };
 const container = {
@@ -65,9 +65,12 @@ const buttonAbled = {
 }
 
 const cardMedia = {
-  width: 50,
-  height: '100%',
-  borderRadius: 30
+  width: 110,
+  display:'flex',
+  justifyContent:'left',
+  borderRadius:50,
+  position:'absolute'
+
 }
 
 
@@ -78,6 +81,22 @@ function mapStateToProps(state){
     order: state.order
   })
 }
+
+class ItemImage extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      pathPic: this.props.pathPic
+    }
+  }
+  render(){
+    return(
+        <img style={cardMedia} src={this.state.pathPic} />
+    )
+
+  }
+}
+
 
 
 class Cart extends Component {
@@ -133,13 +152,9 @@ class Cart extends Component {
               {this.props.order.map(item => (
                 <HeadShake spy={item.title}>
                 <div key={item.title}>
-                  <CardMedia
-                    style={cardMedia}
-                    image={item.pathPic.substring(3,item.pathPic.length)}
-                    title="itemPic"
-                  />
                   <CardContent style={content}>
                     <div style={{flexDirection:'column'}}>
+                        <ItemImage pathPic={item.itemPic} />
                       <div>
                       <Typography component='h5' variant='h5'>
                         {item.quantity + ' ' +item.title}

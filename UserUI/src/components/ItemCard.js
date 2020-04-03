@@ -116,7 +116,7 @@ class ItemCard extends Component {
               quantity: this.state.quantity,
               totCost:   ((this.props.itemCost*10)*this.state.quantity)/10,
               itemCost: this.props.itemCost,
-              pathPic: this.props.itemPic
+              itemPic: this.props.itemPic
             })}>
 
               Aggiungi

@@ -5,6 +5,7 @@ import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import {connect} from 'react-redux'
+import TextField from '@material-ui/core/TextField';
 
 const content = {
     flex: '1 0 auto',
@@ -43,6 +44,7 @@ class Checkout extends Component {
 
     if(this.props.order.length !== 0){
       return(
+        <div style={{display:'flex', flexDirection: 'column'}}>
           <ScrollArea
             speed={0.8}
             className="area"
@@ -75,6 +77,12 @@ class Checkout extends Component {
 
 
           </ScrollArea>
+          <div>
+          <form style={{width:500}} noValidate autoComplete="off">
+            <TextField id="standard-basic" label="Standard" />
+          </form>
+          </div>
+        </div>
       )
     }
     else{

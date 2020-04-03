@@ -16,6 +16,9 @@ import Checkout from '../components/Checkout.js';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import RoomServiceOutlinedIcon from '@material-ui/icons/RoomServiceOutlined';
+
+
 import {Link} from 'react-router-dom'
 
 
@@ -47,10 +50,10 @@ class Index extends Component {
 
     render() {
       return (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '10%', flexDirection:'column'}}>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '9%', flexDirection:'column'}}>
           <div>
             <div>
-            <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10}}>
+            <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:5}}>
               <div style={container}>
                 <FastfoodIcon style={{fontSize: 170}} />
               </div>
@@ -62,15 +65,23 @@ class Index extends Component {
             </Link>
 
             </div>
+            <div>
+              <div>
+              <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10, marginTop: 40}}>
+                <div style={container}>
+                  <RoomServiceOutlinedIcon style={{fontSize: 170}} />
+                </div>
+              </div>
+              <Link to='/home'>
+                <Typography component='h3' variant='h3' style={{color: 'white'}}>
+                  Assistenza
+                </Typography>
+              </Link>
 
-            <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginTop: 100}}>
-              <div style={container}>
-                <FastfoodIcon style={{fontSize: 170}} />
               </div>
             </div>
-          </div>
-        </div>
-
+            </div>
+            </div>
     );
   }
 }
