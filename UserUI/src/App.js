@@ -1,7 +1,16 @@
 import React, { Component } from 'react';
-import Home from './screens/Home.js'
+import Home from './screens/Home.js';
+import Index from './screens/Index.js';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux'
+import {createStore} from 'redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Zoom from 'react-reveal/Zoom';
+import Bounce from 'react-reveal/Bounce';;
 
 const init_order = {
   order : [],  //initial order stack
@@ -68,7 +77,18 @@ export default class App extends Component {
     return (
       <div className="App">
         <Provider store={store}>
-          <Home />
+          <Router>
+            <Route path='/home'>
+            <Bounce right>
+              <Home />
+            </Bounce>
+            </Route>
+            <Route path='/index'>
+              <Zoom right>
+              <Index />
+              </Zoom>
+            </Route>
+          </Router>
         </Provider>
       </div>
     );

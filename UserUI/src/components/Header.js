@@ -2,6 +2,10 @@ import React, {Component} from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import ArrowBackOutlinedIcon from '@material-ui/icons/ArrowBackOutlined';
+import {Link} from 'react-router-dom'
+
+
 
 
 const root = {
@@ -18,9 +22,11 @@ export default class Header extends Component {
           <Toolbar variant="dense" style={{
             backgroundColor: '#FF8C00'
           }}>
-            <Typography variant="h6" color="inherit">
-              LOGO
-            </Typography>
+            <div style={{height: 60, width: 60, justifyContent: 'center', alignItems:'center', borderRadius:50, backgroundColor:'#2C3539', display:'flex'}}>
+              <Link to='/index'>
+                <ArrowBackOutlinedIcon style={{fontSize: 50, color: '#FF8C00'}} />
+              </Link>
+            </div>
           </Toolbar>
         </AppBar>
       </div>

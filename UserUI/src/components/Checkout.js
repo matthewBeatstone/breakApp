@@ -18,7 +18,6 @@ const summary = {
   heigh: 400
 }
 
-
 function mapStateToProps(state){
   return{
     order: state.order
@@ -55,7 +54,6 @@ class Checkout extends Component {
             }}
             >
             {this.props.order.map((orderItem) => (
-
               <div key={orderItem.title} style={summary}>
               <CardContent style={content}>
               <Typography component='h5' variant='h5'>

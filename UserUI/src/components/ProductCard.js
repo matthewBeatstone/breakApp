@@ -17,7 +17,8 @@ import Zoom from 'react-reveal/Zoom';
 
 const card = {
   maxWidth: 345,
-  background:'#FF8C00'
+  background:'#FF8C00',
+  borderRadius:50
 };
 const media = {
   height: 140
@@ -27,17 +28,21 @@ const modal = {
   display: 'flex',
   alignItems:'center',
   justifyContent: 'center',
+  borderRadius:50
 };
 
 const modalContainer = {
     width: 600,
-    height: 700
+    height: 700,
+    borderRadius: 30
 };
 
 const cardContainer = {
   height: 270,
   width: 350,
-  bgColor:'#FF8C00',
+  background:'#FF8C00',
+  borderRadius:50,
+  borderColor: '#FF8C00'
 };
 
 
@@ -91,12 +96,11 @@ class ProductCard extends Component {
           timeout: 1000,
         }}
       >
-        <Fade in={this.state.modalState}>
+        <Zoom left cascade when={this.state.modalState}>
           <div style={modalContainer}>
             {this.props.productsItems}
           </div>
-
-        </Fade>
+        </Zoom>
       </Modal>
       </div>
     );
@@ -160,6 +164,9 @@ export default class ProductCategories extends Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'Amari'} pic={this.amariImg} productsItems={<Beer />} />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />
             </Grid>
             <Grid item xs={12} sm={6}>
               <ProductCard title={'birra'} pic={this.beerImg} productsItems={<Beer />} />

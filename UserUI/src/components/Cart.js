@@ -12,6 +12,9 @@ import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import Checkout from './Checkout.js';
 import LightSpeed from 'react-reveal/LightSpeed';
+import CardMedia from '@material-ui/core/CardMedia';
+import HeadShake from 'react-reveal/HeadShake';
+
 
 
 
@@ -44,12 +47,27 @@ const summary = {
   height: 400
 };
 const button = {
-  width: 400,
+  width: 670,
   height: 60,
   borderRadius: 40,
   backgroundColor: '#FF8C00',
-  position:'absolute',
   bottom: 20,
+  marginTop: 360
+}
+
+const buttonAbled = {
+  width: 670,
+  height: 60,
+  borderRadius: 40,
+  backgroundColor: '#FF8C00',
+  bottom: 20,
+  marginTop: 152
+}
+
+const cardMedia = {
+  width: 50,
+  height: '100%',
+  borderRadius: 30
 }
 
 
@@ -71,6 +89,7 @@ class Cart extends Component {
       disableButton: false,
       modalState: false,
       tot: '',
+      shouldAnimated: true
 
     }
     console.log(this.props.order)
@@ -83,6 +102,7 @@ class Cart extends Component {
       for (var i = 0; i < this.props.order.length; i++) {
         t += (this.props.order[i].totCost * 10)
         console.log(t)
+        this.setState({shouldAnimated: false})
       }
       this.setState({tot: t/10 + '€'})
       if(this.props.order.length > 0){
@@ -111,8 +131,13 @@ class Cart extends Component {
               style={container}
               >
               {this.props.order.map(item => (
-                <LightSpeed left cascade>
+                <HeadShake spy={item.title}>
                 <div key={item.title}>
+                  <CardMedia
+                    style={cardMedia}
+                    image={item.pathPic.substring(3,item.pathPic.length)}
+                    title="itemPic"
+                  />
                   <CardContent style={content}>
                     <div style={{flexDirection:'column'}}>
                       <div>
@@ -120,7 +145,7 @@ class Cart extends Component {
                         {item.quantity + ' ' +item.title}
                       </Typography>
                       </div>
-                      <div style={{marginLeft:'25%'}}>
+                      <div style={{marginLeft:'35%'}}>
                         <ShopCard
                           itemTitle={item.title}
                           quantity={item.quantity}
@@ -131,14 +156,14 @@ class Cart extends Component {
                     </div>
                   </CardContent>
                 </div>
-              </LightSpeed>
+              </HeadShake>
             ))}
             </ScrollArea>
-            <div style={{marginRight: 350}}>
+            <div>
               <Button
                 variant="contained"
                 color="primary"
-                style={button}
+                style={buttonAbled}
                 onClick={this.openModal.bind(this)}
                 disabled={!this.state.disableButton}
               >
@@ -187,6 +212,23 @@ class Cart extends Component {
 
                <div>
              <ShoppingCartOutlinedIcon style={{alignItems:'center', marginTop: 50, fontSize: 80, color: '#FF8C00'}} />
+             </div>
+             <div style={{marginRight: 350}}>
+               <Button
+                 variant="contained"
+                 color="primary"
+                 style={button}
+                 onClick={this.openModal.bind(this)}
+                 disabled={!this.state.disableButton}
+               >
+                 <Typography
+                   style={{color: 'black'}}
+                   content={'h6'} variant='h6'
+                 >
+
+                     {'ORDINA' + ' ' + this.state.tot}
+                  </Typography>
+               </Button>
              </div>
           </div>
       )

@@ -16,6 +16,8 @@ import Checkout from '../components/Checkout.js';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 
+
+
 const modal = {
   display: 'flex',
   alignItems:'center',
@@ -102,7 +104,7 @@ class Home extends Component {
                 <ProductCategories />
                 </Grid>
                   <Grid item xs={12} sm={6}>
-                    <div style={{marginLeft: 400, width:'50%'}}>
+                    <div style={{marginLeft: 260, width:'70%'}}>
                         <Cart />
                       </div>
                    </Grid>

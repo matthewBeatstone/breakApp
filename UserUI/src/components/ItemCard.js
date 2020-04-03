@@ -27,7 +27,8 @@ function mapDispatchToProps(dispatch){
 
 const card = {
     display: 'flex',
-    flexDirection:'row'
+    flexDirection:'row',
+
   };
 const details = {
     display: 'flex',
@@ -36,7 +37,7 @@ const details = {
 
 const content = {
     flex: '1 0 auto',
-    borderRadius: 30
+    borderRadius: 50
   };
 const cover = {
     width: 150,
@@ -114,7 +115,8 @@ class ItemCard extends Component {
               title: this.props.itemTitle,
               quantity: this.state.quantity,
               totCost:   ((this.props.itemCost*10)*this.state.quantity)/10,
-              itemCost: this.props.itemCost
+              itemCost: this.props.itemCost,
+              pathPic: this.props.itemPic
             })}>
 
               Aggiungi
