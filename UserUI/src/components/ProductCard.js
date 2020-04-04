@@ -18,7 +18,7 @@ import Zoom from 'react-reveal/Zoom';
 const card = {
   maxWidth: 345,
   background:'#FF8C00',
-  borderRadius:50
+  borderRadius:70
 };
 const media = {
   height: 140

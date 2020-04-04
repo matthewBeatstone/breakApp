@@ -65,12 +65,11 @@ const buttonAbled = {
 }
 
 const cardMedia = {
-  width: 110,
+  width: 100,
+  heigh: '50%',
   display:'flex',
-  justifyContent:'left',
   borderRadius:50,
   position:'absolute'
-
 }
 
 
@@ -99,6 +98,8 @@ class ItemImage extends Component {
 
 
 
+
+
 class Cart extends Component {
   constructor(props){
     super(props);
@@ -106,12 +107,15 @@ class Cart extends Component {
       modalState : false,
       buttonText: 'ORDINA',
       disableButton: false,
-      modalState: false,
       tot: '',
       shouldAnimated: true
 
     }
     console.log(this.props.order)
+  }
+
+  componentDidMount(){
+    this.setState({modalState: false})
   }
 
 
@@ -153,13 +157,14 @@ class Cart extends Component {
                 <HeadShake spy={item.title}>
                 <div key={item.title}>
                   <CardContent style={content}>
-                    <div style={{flexDirection:'column'}}>
-                        <ItemImage pathPic={item.itemPic} />
-                      <div>
+                    <div style={{flexDirection:'column', height: 70 }}>
+
+                      <ItemImage pathPic={item.itemPic} />
+
                       <Typography component='h5' variant='h5'>
                         {item.quantity + ' ' +item.title}
                       </Typography>
-                      </div>
+
                       <div style={{marginLeft:'35%'}}>
                         <ShopCard
                           itemTitle={item.title}
