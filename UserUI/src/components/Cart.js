@@ -14,6 +14,8 @@ import Checkout from './Checkout.js';
 import LightSpeed from 'react-reveal/LightSpeed';
 import CardMedia from '@material-ui/core/CardMedia';
 import HeadShake from 'react-reveal/HeadShake';
+import {Link, withRouter} from 'react-router-dom'
+
 
 
 
@@ -179,43 +181,23 @@ class Cart extends Component {
               </HeadShake>
             ))}
             </ScrollArea>
-            <div>
-              <Button
-                variant="contained"
-                color="primary"
-                style={buttonAbled}
-                onClick={this.openModal.bind(this)}
-                disabled={!this.state.disableButton}
-              >
-                <Typography
-                  style={{color: 'black'}}
-                  content={'h6'} variant='h6'
+              <div>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  style={buttonAbled}
+                  onClick={() => this.props.history.push('/checkout')}
+                  disabled={!this.state.disableButton}
                 >
+                  <Typography
+                    style={{color: 'black'}}
+                    content={'h6'} variant='h6'
+                  >
 
-                    {'ORDINA' + ' ' + this.state.tot}
-                 </Typography>
-              </Button>
-            </div>
-            <Modal
-              aria-labelledby="transition-modal-title"
-              aria-describedby="transition-modal-description"
-              style={modal}
-              open={this.state.modalState}
-              onClose={this.closeModal.bind(this)}
-              closeAfterTransition
-              BackdropComponent={Backdrop}
-              BackdropProps={{
-                timeout: 1000,
-              }}
-            >
-              <Fade in={this.state.modalState}>
-                <div style={modalContainer}>
-                  <div style={summary}>
-                  <Checkout />
-                  </div>
-                </div>
-              </Fade>
-            </Modal>
+                      {'ORDINA' + ' ' + this.state.tot}
+                   </Typography>
+                </Button>
+              </div>
             </div>
 
       )
@@ -257,4 +239,4 @@ class Cart extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Cart)
+export default withRouter(connect(mapStateToProps)(Cart))

@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "babel": "^6.23.0",
-    "babel-cli": "^6.26.0"
+    "babel-cli": "^6.26.0",
+    "twilio": "^3.42.0"
   },
   "scripts": {
     "start": "react-scripts start",
