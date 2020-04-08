@@ -2,13 +2,13 @@ var express = require('express');
 var socket = require('socket.io');
 var uniqid = require('uniqid');
 var cors = require('cors');
-const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+dotenv.config();
 const pino = require('express-pino-logger')();
-const client = require('twilio')(
-  'AC96b0cd6db9413443fdc56b4bc20796ac',
-  'aeef66ace486ac253b921656f8d01a36'
-);
+const client = require('twilio')(process.env.SID, process.env.TOKEN);
+
 var app = express();
+
 
 
 server = app.listen(8080, function(){
@@ -28,15 +28,14 @@ io.on('connection', (socket) => {
     })
 
 });
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(pino);
 app.use(cors())
+
 app.post('/api/messages', (req, res) => {
   res.header('Content-Type', 'application/json',"Access-Control-Allow-Origin", "*");
   client.messages
     .create({
-      from: +18084009208,
+      from: twilio_number,
       to: req.body.to,
       body: req.body.body
     })
