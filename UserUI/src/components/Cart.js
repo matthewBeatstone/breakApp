@@ -5,6 +5,7 @@ import {connect} from 'react-redux'
 import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
+import Card from '@material-ui/core/Card';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
@@ -26,8 +27,9 @@ const content = {
   background:'#FF8C00',
   marginTop: 20,
   borderRadius: 100,
-  height: 80,
-  flexDirection:'column'
+  height: 100,
+  display:'flex',
+  alignItems: 'center'
 };
 const container = {
   height: 700,
@@ -67,11 +69,10 @@ const buttonAbled = {
 }
 
 const cardMedia = {
-  width: 100,
-  heigh: '50%',
-  display:'flex',
+  width: '25%',
+  height: 100,
   borderRadius:50,
-  position:'absolute'
+  justifyContent: 'flex-start',
 }
 
 
@@ -158,16 +159,16 @@ class Cart extends Component {
               {this.props.order.map(item => (
                 <HeadShake spy={item.title}>
                 <div key={item.title}>
-                  <CardContent style={content}>
-                    <div style={{flexDirection:'column', height: 70 }}>
-
+                  <Card style={content}>
+                    <div style={{flexDirection:'row', display:'flex', height: '100%'}}>
                       <ItemImage pathPic={item.itemPic} />
+                      <CardContent>
+                        <Typography component='h5' variant='h5'>
+                          {item.quantity + ' ' +item.title}
+                        </Typography>
+                      </CardContent>
 
-                      <Typography component='h5' variant='h5'>
-                        {item.quantity + ' ' +item.title}
-                      </Typography>
-
-                      <div style={{marginLeft:'35%'}}>
+                      <div style={{marginLeft:'15%'}}>
                         <ShopCard
                           itemTitle={item.title}
                           quantity={item.quantity}
@@ -176,7 +177,7 @@ class Cart extends Component {
                       </div>
                       {console.log(this.props.order)}
                     </div>
-                  </CardContent>
+                  </Card>
                 </div>
               </HeadShake>
             ))}

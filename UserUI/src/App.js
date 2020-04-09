@@ -95,11 +95,6 @@ export default class App extends Component {
               <Index />
               </Zoom>
             </Route>
-            <Route path='/index'>
-              <Zoom right>
-              <Index />
-              </Zoom>
-            </Route>
           </Router>
         </Provider>
       </div>

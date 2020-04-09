@@ -63,11 +63,6 @@ class Home extends Component {
 
   }
 
-  send_order = () => {
-    const socket = io('http://127.0.0.1:8080');
-    socket.emit('table2', this.props.order)
-  }
-
   openModal(){
     this.setState({modalState: true})
   }
