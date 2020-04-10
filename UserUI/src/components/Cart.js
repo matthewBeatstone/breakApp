@@ -29,7 +29,8 @@ const content = {
   borderRadius: 100,
   height: 100,
   display:'flex',
-  alignItems: 'center'
+  alignItems: 'center',
+  width:'100%'
 };
 const container = {
   height: 700,
@@ -69,7 +70,7 @@ const buttonAbled = {
 }
 
 const cardMedia = {
-  width: '25%',
+  width: '17%',
   height: 100,
   borderRadius:50,
   justifyContent: 'flex-start',
@@ -158,27 +159,22 @@ class Cart extends Component {
               >
               {this.props.order.map(item => (
                 <HeadShake spy={item.title}>
-                <div key={item.title}>
-                  <Card style={content}>
-                    <div style={{flexDirection:'row', display:'flex', height: '100%'}}>
+                  <div key={item.title} style={content}>
                       <ItemImage pathPic={item.itemPic} />
-                      <CardContent>
-                        <Typography component='h5' variant='h5'>
+                      <div style={{left: '25
+                      %', position:'absolute'}}>
+                        <Typography variant='h5'>
                           {item.quantity + ' ' +item.title}
                         </Typography>
-                      </CardContent>
-
-                      <div style={{marginLeft:'15%'}}>
+                      </div>
+                      <div style={{right: 20, position:'absolute'}}>
                         <ShopCard
                           itemTitle={item.title}
                           quantity={item.quantity}
                           itemCost = {item.itemCost}
                           />
                       </div>
-                      {console.log(this.props.order)}
                     </div>
-                  </Card>
-                </div>
               </HeadShake>
             ))}
             </ScrollArea>

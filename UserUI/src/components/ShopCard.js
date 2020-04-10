@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import CancelIcon from '@material-ui/icons/Cancel';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
 import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
@@ -98,10 +99,10 @@ class ShopCard extends Component {
                 onClick={this.remove.bind(this)}>
                <RemoveCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
-            <IconButton aria-label="next" onClick={this.add.bind(this)}>
+            <IconButton aria-label="next" onClick={this.add.bind(this)} >
               <AddCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
-            <HighlightOffTwoToneIcon style = {{fontSize:40, marginLeft:30}}onClick={() => this.props.remove_item(this.state.title)}/>
+            <CancelIcon style = {{fontSize:40, marginLeft:30}}onClick={() => this.props.remove_item(this.state.title)}/>
           </div>
         </div>
     </div>
