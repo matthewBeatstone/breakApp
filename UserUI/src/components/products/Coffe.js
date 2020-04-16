@@ -13,6 +13,7 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
+import RadioGroup from '@material-ui/core/RadioGroup';
 
 
 const content = {
@@ -27,6 +28,7 @@ export default class Coffe extends Component {
     this.state = {
       modalState : false,
       coffeTitle: 'Caffe ',
+      coffeFormat: '',
       coffeCost: 1.1,
 
     }
@@ -76,6 +78,18 @@ export default class Coffe extends Component {
     }
   }
 
+  handleRadio = (event) => {
+    switch (event.target.value) {
+      case 'tazza_grande':
+        this.setState({coffeFormat: 'tazza grande', coffeCost: this.state.coffeCost + 0.5})
+        break;
+      case 'tazza_piccola':
+        this.setState({coffeFormat: 'tazza piccola', coffeCost: this.state.coffeCost - 0.5})
+        break;
+
+    }
+  }
+
 
   render(){
     return(
@@ -92,23 +106,47 @@ export default class Coffe extends Component {
           <div>
           <Card>
             <CardContent>
-            <ItemCard  itemTitle={this.state.coffeTitle} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
+            <ItemCard  itemTitle={this.state.coffeTitle + this.state.coffeFormat} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
             <div style={{flexDirection:'row', display:'flex'}}>
-            <FormControl component="fieldset">
-              <FormLabel component="legend">Assign responsibility</FormLabel>
-              <FormGroup>
-                {this.coffeType.map(coffe => (
-                  <div key={coffe.type} style={{dispaly:'flex', flexDirection:'row'}}>
-                  <FormControlLabel
-                    control={<Checkbox name={coffe.type} onChange={(event) => this.handleCheckBox(event, coffe.cost) }/>}
-                    label={coffe.type}
-                  />
-                  </div>
-                ))}
-
-              </FormGroup>
-              <FormHelperText>Be careful</FormHelperText>
-            </FormControl>
+              <div>
+                <FormControl component="fieldset">
+                  <FormGroup>
+                  <ScrollArea
+                    speed={0.8}
+                    className="area"
+                    contentClassName="content"
+                    horizontal={false}
+                    style={{
+                      height: 200,
+                    }}
+                    >
+                    {this.coffeType.map(coffe => (
+                      <div key={coffe.type} >
+                      <FormControlLabel
+                        control={
+                          <Checkbox
+                            style={{display:'flex', flexDirection: 'row'}}
+                            name={coffe.type}
+                            onChange={(event) => this.handleCheckBox(event, coffe.cost)} />
+                        }
+                        label={coffe.type}
+                      />
+                      </div>
+                    ))}
+                    </ScrollArea>
+                  </FormGroup>
+                  <FormHelperText>Be careful</FormHelperText>
+                </FormControl>
+              </div>
+              <div style={{marginLeft: 100, marginTop: 40}}>
+                <FormControl component="fieldset" >
+                  <FormLabel component="legend">Scegli il formato</FormLabel>
+                  <RadioGroup aria-label="format" name="formato" value={this.state.coffeFormat} onChange={(event) => this.handleRadio(event) }>
+                    <FormControlLabel value="tazza_grande" control={<Radio />} label="tazza grande" />
+                    <FormControlLabel value="tazza_piccola" control={<Radio />} label="tazza piccola" />
+                  </RadioGroup>
+                  </FormControl>
+              </div>
             </div>
 
           </CardContent>
