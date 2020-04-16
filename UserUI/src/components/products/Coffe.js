@@ -80,10 +80,10 @@ export default class Coffe extends Component {
 
   handleRadio = (event) => {
     switch (event.target.value) {
-      case 'tazza_grande':
+      case 'tazza grande':
         this.setState({coffeFormat: 'tazza grande', coffeCost: this.state.coffeCost + 0.5})
         break;
-      case 'tazza_piccola':
+      case 'tazza piccola':
         this.setState({coffeFormat: 'tazza piccola', coffeCost: this.state.coffeCost - 0.5})
         break;
 
@@ -106,7 +106,7 @@ export default class Coffe extends Component {
           <div>
           <Card>
             <CardContent>
-            <ItemCard  itemTitle={this.state.coffeTitle + this.state.coffeFormat} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
+            <ItemCard  itemTitle={this.state.coffeTitle + ' ' +this.state.coffeFormat} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
             <div style={{flexDirection:'row', display:'flex'}}>
               <div>
                 <FormControl component="fieldset">
@@ -142,8 +142,8 @@ export default class Coffe extends Component {
                 <FormControl component="fieldset" >
                   <FormLabel component="legend">Scegli il formato</FormLabel>
                   <RadioGroup aria-label="format" name="formato" value={this.state.coffeFormat} onChange={(event) => this.handleRadio(event) }>
-                    <FormControlLabel value="tazza_grande" control={<Radio />} label="tazza grande" />
-                    <FormControlLabel value="tazza_piccola" control={<Radio />} label="tazza piccola" />
+                    <FormControlLabel value="tazza grande" control={<Radio />} label="tazza grande" />
+                    <FormControlLabel value="tazza piccola" control={<Radio />} label="tazza piccola" />
                   </RadioGroup>
                   </FormControl>
               </div>

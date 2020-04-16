@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Home from './screens/Home.js';
 import Index from './screens/Index.js';
 import Checkout from './components/Checkout.js'
+import Receipt from './components/Receipt.js'
 
 import {Provider} from 'react-redux';
 import {createStore} from 'redux';
@@ -80,6 +81,7 @@ export default class App extends Component {
         <div className="App">
         <Provider store={store}>
           <Router>
+            <Switch>
             <Route path='/home'>
             <Bounce right>
               <Home />
@@ -90,11 +92,17 @@ export default class App extends Component {
               <Checkout />
               </Bounce>
             </Route>
+            <Route path='/receipt'>
+              <Bounce right>
+              <Receipt />
+              </Bounce>
+            </Route>
             <Route path='/index'>
               <Zoom right>
               <Index />
               </Zoom>
             </Route>
+            </Switch>
           </Router>
         </Provider>
       </div>

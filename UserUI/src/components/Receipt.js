@@ -18,8 +18,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
-import {withRouter, Link} from 'react-router-dom';
-
 
 import io from 'socket.io-client'
 
@@ -52,7 +50,7 @@ function mapStateToProps(state){
   }
 }
 
-class Checkout extends Component {
+class Receipt extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -71,6 +69,7 @@ class Checkout extends Component {
       console.log(t)
     }
     this.state.tot = t/10 + '€'
+    this.onSubmit = this.onSubmit.bind(this);
   }
   componentDidMount() {
     document.body.style.backgroundColor = '#2C3539'
@@ -87,13 +86,31 @@ class Checkout extends Component {
 
   send_order = () => {
     const socket = io('http://127.0.0.1:8080');
-    socket.emit('orders', {
-      name: this.state.name,
-      order: this.props.order,
-      paymentMethod: this.state.payment,
-      location: 1
-    })
+    socket.emit('orders', this.props.order)
   }
+
+  onSubmit(event) {
+    event.preventDefault();
+    fetch('http://127.0.0.1:8080/api/messages', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        phoneNumber: this.state.phoneNumber,
+        messageBody: this.porp.order,
+        name: this.state.name,
+        paymentMethod: this.state.payment
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          console.log('sent')
+        } else {
+          console.log('error')
+        }
+    });
+}
+
 
 
   render(){
@@ -108,55 +125,16 @@ class Checkout extends Component {
                   Riepilogo
                   </Typography>
               </div>
-              <div style={{marginLeft: 20}}>
-                <Card style={summary}>
-                  <ScrollArea
-                    speed={0.8}
-                    className="area"
-                    contentClassName="content"
-                    horizontal={false}
-                    style={{height: 500}}
-                    >
-                    {this.props.order.map((orderItem) => (
-                      <div key={orderItem.title}>
-                        <CardContent style={content}>
-                        <div>
-                          <Typography component='h5' variant='h5' style={{color:'#FF8C00'}}>
-                            {orderItem.quantity + ' ' +orderItem.title}
-                          </Typography>
-                        </div>
-                        </CardContent>
-                      </div>
-                        )
-                      )
-                    }
-                  </ScrollArea>
-                </Card>
-              <div>
-                <Typography  style={{color:'#FF8C00', fontSize: 50}}>
-                    {this.state.tot}
-                </Typography>
-              </div>
-            </div>
-          </div>
-            <div style={{width: '90%', height:500, marginLeft: 300, backgroundColor: '#FF8C00',  marginTop: 50, borderRadius: 50, marginRight:20}}>
-              <div style={{display:'flex', justifyContent:'flex-start', marginLeft: 30, marginTop: 60}}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
-                <RadioGroup aria-label="payment" name="payment" value={this.state.payment} onChange={(input) => this.setState({payment: input})}>
-                  <div style={{display:'flex', flexDirection:'row'}}>
-                    <EuroIcon style={{fontSize: 60, marginRight: 30, color: '#2C3539'}} />
-                    <FormControlLabel value="cash" control={<Radio style={{color: 'white'}} />} label="Contanti" />
-                  </div>
-                  <div style={{display:'flex', flexDirection:'row'}}>
-                  <CreditCardIcon style={{fontSize:60, marginRight: 30, color:'#2C3539'}} />
-                  <FormControlLabel value="card" control={<Radio  style={{color: 'white'}}/>} label="Carte" />
-                  </div>
-                </RadioGroup>
-                </FormControl>
-              </div>
-            </div>
-            <div style={{width: '90%', height: 'auto', position: 'absolute', bottom:50, justifyContent:'center'}}>
+
+              <form style={{width:400, marginLeft: 10, marginTop: 20}} noValidate autoComplete="off">
+                <TextField
+                  id="standard-basic"
+                  label="Tel."
+                  style={{width:400, marginTop: 20}}
+                  value={this.state.phoneNumber}
+                  onChange={(input) => this.setState({phoneNumber: input.target.value})}
+                  value={this.state.phoneNumber} />
+              </form>
             </div>
             <div style={{position: 'absolute', bottom: 40}}>
               <Button
@@ -164,14 +142,8 @@ class Checkout extends Component {
                 variant="contained"
                 color="primary"
                 label="invia il tuo ordine"
-                onClick={this.send_order}>
-                <Link to='/receipt'>
-                  <Typography component='h5' variant='h5' style={{color: 'white'}}>
-                    Ordina
-                  </Typography>
-                </Link>
-
-
+                onClick={this.onSubmit}>
+                Invia il tuo ordine
               </Button>
             </div>
           </div>
@@ -185,4 +157,4 @@ class Checkout extends Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(Checkout))
+export default connect(mapStateToProps)(Receipt)
