@@ -9,6 +9,15 @@ import TextField from '@material-ui/core/TextField';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
+import EuroIcon from '@material-ui/icons/Euro';
+import CreditCardIcon from '@material-ui/icons/CreditCard';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormLabel from '@material-ui/core/FormLabel';
+import Keyboard from 'react-simple-keyboard';
+import 'react-simple-keyboard/build/css/index.css';
 
 import io from 'socket.io-client'
 
@@ -47,10 +56,12 @@ class Checkout extends Component {
     this.state = {
       modalState : false,
       tot: '',
-      to: '',
+      phoneNumber: '',
       body: '',
       submitting: false,
-      error: false
+      error: false,
+      showKeyboard: true,
+      name: ''
     }
     var t = 0;
     for (var i = 0; i < this.props.order.length; i++) {
@@ -83,7 +94,12 @@ class Checkout extends Component {
     fetch('http://127.0.0.1:8080/api/messages', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({to: this.state.to, body: 'ciao'})
+      body: JSON.stringify({
+        phoneNumber: this.state.phoneNumber,
+        messageBody: this.porp.order,
+        name: this.state.name,
+        paymentMethod: this.state.payment
+      })
     })
       .then(res => res.json())
       .then(data => {
@@ -141,16 +157,41 @@ class Checkout extends Component {
             </div>
           </div>
             <div style={{width: '90%', height:500, marginLeft: 300, backgroundColor: '#FF8C00',  marginTop: 50, borderRadius: 50, marginRight:20}}>
+              <div style={{display:'flex', justifyContent: 'center'}}>
+                <TextField
+                  id="standard-basic"
+                  label="Nome"
+                  style={{width:400}}
+                  variant='filled'
+                  value={this.state.name}
+                  onChange={(text) => this.setState({name: text.target.value})}/>
+              </div>
+              <div style={{display:'flex', justifyContent:'flex-start', marginLeft: 30, marginTop: 60}}>
+              <FormControl component="fieldset">
+                <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
+                <RadioGroup aria-label="payment" name="payment" value={this.state.payment} onChange={(input) => this.setState({payment: input})}>
+                  <div style={{display:'flex', flexDirection:'row'}}>
+                    <EuroIcon style={{fontSize: 60, marginRight: 30, color: '#2C3539'}} />
+                    <FormControlLabel value="cash" control={<Radio style={{color: 'white'}} />} label="Contanti" />
+                  </div>
+                  <div style={{display:'flex', flexDirection:'row'}}>
+                  <CreditCardIcon style={{fontSize:60, marginRight: 30, color:'#2C3539'}} />
+                  <FormControlLabel value="card" control={<Radio  style={{color: 'white'}}/>} label="Carte" />
+                  </div>
+                </RadioGroup>
+                </FormControl>
+              </div>
               <form style={{width:400, marginLeft: 10, marginTop: 20}} noValidate autoComplete="off">
-                <TextField id="standard-basic" label="Nickname"  style={{width:400}}/>
                 <TextField
                   id="standard-basic"
                   label="Tel."
                   style={{width:400, marginTop: 20}}
-                  value={this.state.to}
-                  onChange={(tel) => this.setState({to: tel.target.value})}
-                  value={this.state.to} />
+                  value={this.state.phoneNumber}
+                  onChange={(input) => this.setState({phoneNumber: input.target.value})}
+                  value={this.state.phoneNumber} />
               </form>
+            </div>
+            <div style={{width: '90%', height: 'auto', position: 'absolute', bottom:50, justifyContent:'center'}}>
             </div>
             <div style={{position: 'absolute', bottom: 40}}>
               <Button

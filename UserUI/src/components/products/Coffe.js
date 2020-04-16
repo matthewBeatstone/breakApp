@@ -7,6 +7,12 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from  '@material-ui/core/Typography';
 import UndoIcon from '@material-ui/icons/Undo';
 import IconButton from '@material-ui/core/IconButton';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import Checkbox from '@material-ui/core/Checkbox';
 
 
 const content = {
@@ -21,13 +27,24 @@ export default class Coffe extends Component {
     this.state = {
       modalState : false,
       coffeTitle: 'Caffe ',
-      coffeCost: 0
+      coffeCost: 1.1,
+
     }
     this.caffe = {
       title: 'Caffe',
       cost: 1.1,
       img: require('../../assets/images/tazzina.jpeg'),
     }
+
+    this.coffeType = [
+      {type: 'decaffeinato', cost: null},
+      {type: 'corretto', cost: 0.5},
+      {type: 'marocchino', cost: 0.9},
+      {type: 'orzo', cost: 0.5},
+      {type: 'gingseng', cost: 0.5},
+      {type: 'latte', cost: 0.3},
+    ]
+    this.coffeArray = ['Caffe']
 
     this.cappuccino = {
       title: 'Cappuccino',
@@ -40,77 +57,25 @@ export default class Coffe extends Component {
       cost: 3.5,
       img: require('../../assets/images/cioccolata.jpg')
     }
-    this.coffeTitle = this.caffe.title
-    this.state.coffeCost = this.caffe.cost
   }
 
 
-  addCoffeType(type){
-    switch (type) {
-      case 'corretto':
-          this.setState({coffeTitle: this.state.coffeTitle + ' corretto', coffeCost: this.state.coffeCost+0.5})
-        break;
-      case 'decaffeinato':
-        this.setState({coffeTitle: this.state.coffeTitle + ' decaffeinato'})
-        break;
-      case 'marocchino':
-        this.setState({coffeTitle: this.state.coffeTitle + ' marocchino', coffeCost: this.state.coffeCost+0.9})
-        break;
-      case 'orzo':
-        this.setState({coffeTitle: this.state.coffeTitle + ' orzo', coffeCost: this.state.coffeCost+0.5})
-        break;
-      case 'gingseng':
-        this.setState({coffeTitle: this.state.coffeTitle + ' gingseng', coffeCost: this.state.coffeCost+0.5})
-        break;
-      case 'americano':
-        this.setState({coffeTitle: this.state.coffeTitle + ' americano'})
-        break;
-      case 'latte':
-        this.setState({coffeTitle: this.state.coffeTitle + ' latte', coffeCost: (this.state.coffeCost*10+0.3*10)/10})
-        break;
+  handleCheckBox = (event, cost) => {
+    if(event.target.checked)
+      this.setState({coffeTitle: this.state.coffeTitle + ' ' + event.target.name})
+    else{
+      this.setState({coffeTitle: this.state.coffeTitle.substring(0, this.state.coffeTitle.lastIndexOf(" "))})
     }
-  }
-
-  undo(){
-    if(this.state.coffeTitle.localeCompare(this.caffe.title) !== 0){
-      const title = this.state.coffeTitle.split(" ")
-      var newTitle = []
-      var newCost = 0
-      for (var i = 0; i < title.length-1; i++) {
-        if(title[i].localeCompare("") !== 0)
-          newTitle.push(title[i])
-      }
-      console.log(newTitle.length)
-      if(newTitle.length > 1){
-        this.state.coffeCost = this.caffe.cost
-        for (var i = 0; i < newTitle.length; i++) {
-          console.log(newTitle[i])
-          switch (newTitle[i]) {
-            case 'corretto':
-                this.setState({coffeCost: this.state.coffeCost+0.5})
-                break;
-            case 'marocchino':
-              this.setState({coffeCost: this.state.coffeCost+0.9})
-              break;
-            case 'orzo':
-              this.setState({coffeCost: this.state.coffeCost+0.5})
-              break;
-            case 'gingseng':
-              this.setState({coffeCost: this.state.coffeCost+0.5})
-              break;
-            case 'latte':
-              this.setState({coffeCost: (this.state.coffeCost*10+0.3*10)/10})
-              break;
-          }
-        }
+    if(cost !== null){
+      if(event.target.checked){
+        this.setState({coffeCost: (this.state.coffeCost*10 + cost*10)/10})
       }
       else{
-        this.setState({coffeCost: this.caffe.cost})
+        this.setState({coffeCost: (this.state.coffeCost*10 - cost*10)/10})
       }
-      console.log(newTitle)
-      this.setState({coffeTitle: newTitle.join(" ")})
     }
   }
+
 
   render(){
     return(
@@ -125,74 +90,25 @@ export default class Coffe extends Component {
           }}
           >
           <div>
-          <Card >
+          <Card>
             <CardContent>
             <ItemCard  itemTitle={this.state.coffeTitle} itemCost={this.state.coffeCost} itemPic={this.caffe.img} />
-            <IconButton onClick={this.undo.bind(this)}>
-            <UndoIcon/>
-            </IconButton>
-            <div style={{flexDirection:'column'}}>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'corretto')}
-                name="radio-button-demo"
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Corretto
-              </Typography>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'decaffeinato')}
-                name="radio-button-demo"
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Decaffeinato
-              </Typography>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'marocchino')}
-                name="radio-button-demo"
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Marocchino
-              </Typography>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'orzo')}
-                name="radio-button-demo"
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Orzo
-              </Typography>
+            <div style={{flexDirection:'row', display:'flex'}}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Assign responsibility</FormLabel>
+              <FormGroup>
+                {this.coffeType.map(coffe => (
+                  <div key={coffe.type} style={{dispaly:'flex', flexDirection:'row'}}>
+                  <FormControlLabel
+                    control={<Checkbox name={coffe.type} onChange={(event) => this.handleCheckBox(event, coffe.cost) }/>}
+                    label={coffe.type}
+                  />
+                  </div>
+                ))}
 
-              <div style={{alignItems:'center'}}>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'gingseng')}
-                name="radio-button-demo"
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Gingseng
-              </Typography>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'americano')}
-                name="radio-button-demo"
-                style={{marginLeft: 21}}
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Americano
-              </Typography>
-              <Radio
-                onChange={this.addCoffeType.bind(this, 'latte')}
-                name="radio-button-demo"
-                style={{marginLeft: 21}}
-                color='default'
-                />
-              <Typography component='h7' variant='h6'>
-                Latte
-              </Typography>
-              </div>
+              </FormGroup>
+              <FormHelperText>Be careful</FormHelperText>
+            </FormControl>
             </div>
 
           </CardContent>

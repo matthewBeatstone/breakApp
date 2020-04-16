@@ -15,12 +15,7 @@ import Checkout from './Checkout.js';
 import LightSpeed from 'react-reveal/LightSpeed';
 import CardMedia from '@material-ui/core/CardMedia';
 import HeadShake from 'react-reveal/HeadShake';
-import {Link, withRouter} from 'react-router-dom'
-
-
-
-
-
+import {Link, withRouter} from 'react-router-dom';
 
 
 const content = {
@@ -161,8 +156,7 @@ class Cart extends Component {
                 <HeadShake spy={item.title}>
                   <div key={item.title} style={content}>
                       <ItemImage pathPic={item.itemPic} />
-                      <div style={{left: '25
-                      %', position:'absolute'}}>
+                      <div style={{left: '25%', position:'absolute'}}>
                         <Typography variant='h5'>
                           {item.quantity + ' ' +item.title}
                         </Typography>
