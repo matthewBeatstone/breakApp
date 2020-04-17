@@ -23,7 +23,7 @@ export default class Header extends Component {
             backgroundColor: '#FF8C00'
           }}>
             <div style={{height: 60, width: 60, justifyContent: 'center', alignItems:'center', borderRadius:50, backgroundColor:'#2C3539', display:'flex'}}>
-              <Link to='/index'>
+              <Link to={this.props.path}>
                 <ArrowBackOutlinedIcon style={{fontSize: 50, color: '#FF8C00'}} />
               </Link>
             </div>

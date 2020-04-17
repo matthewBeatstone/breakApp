@@ -18,6 +18,8 @@ import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
+import Bounce from 'react-reveal/Bounce';
+
 
 import io from 'socket.io-client'
 
@@ -117,16 +119,10 @@ class Receipt extends Component {
 
     if(!this.props.order.length !== 0){
       return(
+        <Bounce right>
         <div style={{height: 900}}>
-          <div style={{display:'flex', flexDirection: 'row'}}>
-            <div style={{display:'flex', flexDirection:'column'}}>
-              <div style={{marginTop:20, marginLeft: 20, alignItems:'center'}}>
-                <Typography component='h5' variant='h5' style={{justifyContent: 'center', alignItems:'center', display:'flex', color: 'white'}}>
-                  Riepilogo
-                  </Typography>
-              </div>
-
-              <form style={{width:400, marginLeft: 10, marginTop: 20}} noValidate autoComplete="off">
+          <div style={{display:'flex', justifyContent:'center'}}>
+              <form style={{width:400, display:'flex', justifyContent: 'center'}} noValidate autoComplete="off">
                 <TextField
                   id="standard-basic"
                   label="Tel."
@@ -135,19 +131,19 @@ class Receipt extends Component {
                   onChange={(input) => this.setState({phoneNumber: input.target.value})}
                   value={this.state.phoneNumber} />
               </form>
-            </div>
-            <div style={{position: 'absolute', bottom: 40}}>
-              <Button
-                style={{width: 1920, height: 90, display:'flex', alignItems: 'center', background:'#FF8C00', borderRadius:50, position:'absolute'}}
-                variant="contained"
-                color="primary"
-                label="invia il tuo ordine"
-                onClick={this.onSubmit}>
-                Invia il tuo ordine
-              </Button>
-            </div>
+          </div>
+          <div style={{position: 'absolute', bottom: 40}}>
+            <Button
+              style={{width: 1920, height: 90, display:'flex', alignItems: 'center', background:'#FF8C00', borderRadius:50, position:'absolute'}}
+              variant="contained"
+              color="primary"
+              label="invia il tuo ordine"
+              onClick={this.onSubmit}>
+              Invia il tuo ordine
+            </Button>
           </div>
         </div>
+        </Bounce>
       )
     }
     else{

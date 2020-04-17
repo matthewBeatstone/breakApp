@@ -115,6 +115,9 @@ class Cart extends Component {
 
   componentDidMount(){
     this.setState({modalState: false})
+    if(this.props.order.length > 0){
+      this.setState({disableButton: true})
+    }
   }
 
 

@@ -19,6 +19,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import {withRouter, Link} from 'react-router-dom';
+import Bounce from 'react-reveal/Bounce';
+import Header from './Header.js'
+
 
 
 import io from 'socket.io-client'
@@ -100,6 +103,8 @@ class Checkout extends Component {
 
     if(!this.props.order.length !== 0){
       return(
+        <Bounce right>
+        <Header path='/home'/>
         <div style={{height: 900}}>
           <div style={{display:'flex', flexDirection: 'row'}}>
             <div style={{display:'flex', flexDirection:'column'}}>
@@ -159,23 +164,22 @@ class Checkout extends Component {
             <div style={{width: '90%', height: 'auto', position: 'absolute', bottom:50, justifyContent:'center'}}>
             </div>
             <div style={{position: 'absolute', bottom: 40}}>
+            <Link to='/receipt'>
               <Button
                 style={{width: 1920, height: 90, display:'flex', alignItems: 'center', background:'#FF8C00', borderRadius:50, position:'absolute'}}
                 variant="contained"
                 color="primary"
                 label="invia il tuo ordine"
                 onClick={this.send_order}>
-                <Link to='/receipt'>
                   <Typography component='h5' variant='h5' style={{color: 'white'}}>
                     Ordina
                   </Typography>
-                </Link>
-
-
               </Button>
+            </Link>
             </div>
           </div>
         </div>
+        </Bounce>
       )
     }
     else{

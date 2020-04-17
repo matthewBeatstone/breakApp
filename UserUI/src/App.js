@@ -13,7 +13,7 @@ import {
   Link
 } from "react-router-dom";
 import Zoom from 'react-reveal/Zoom';
-import Bounce from 'react-reveal/Bounce';;
+import Bounce from 'react-reveal/Bounce';
 
 const init_order = {
   order : [],  //initial order stack
@@ -89,12 +89,12 @@ export default class App extends Component {
             </Route>
             <Route path='/checkout'>
               <Bounce right>
-              <Checkout />
+                <Checkout />
               </Bounce>
             </Route>
             <Route path='/receipt'>
               <Bounce right>
-              <Receipt />
+                <Receipt />
               </Bounce>
             </Route>
             <Route path='/index'>
