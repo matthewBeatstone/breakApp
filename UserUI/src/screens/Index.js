@@ -50,10 +50,10 @@ class Index extends Component {
 
     render() {
       return (
-        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '9%', flexDirection:'column'}}>
-          <div>
-            <div>
-            <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:5}}>
+        <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '13%', flexDirection:'column'}}>
+          <div style={{display:'flex', flexDirection:'row'}}>
+            <div style={{marginRight: 100}}>
+            <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10}}>
               <div style={container}>
                 <FastfoodIcon style={{fontSize: 170}} />
               </div>
@@ -63,11 +63,10 @@ class Index extends Component {
                 Ordina
               </Typography>
             </Link>
-
             </div>
             <div>
               <div>
-              <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10, marginTop: 40}}>
+              <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10}}>
                 <div style={container}>
                   <RoomServiceOutlinedIcon style={{fontSize: 170}} />
                 </div>

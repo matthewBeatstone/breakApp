@@ -25,10 +25,10 @@ const content = {
   height: 100,
   display:'flex',
   alignItems: 'center',
-  width:'100%'
+  width: 510
 };
 const container = {
-  height: 700,
+  height: 420,
   width: '100%',
 
 };
@@ -47,12 +47,10 @@ const summary = {
   height: 400
 };
 const button = {
-  width: 670,
+  width: 400,
   height: 60,
   borderRadius: 40,
   backgroundColor: '#FF8C00',
-  bottom: 20,
-  marginTop: 360
 }
 
 const buttonAbled = {
@@ -149,7 +147,7 @@ class Cart extends Component {
       return(
         <div style={container}>
           <ScrollArea
-              speed={0.8}
+              speed={1.5}
               className="area"
               contentClassName="content"
               horizontal={false}
@@ -179,7 +177,7 @@ class Cart extends Component {
                 <Button
                   variant="contained"
                   color="primary"
-                  style={buttonAbled}
+                  style={button}
                   onClick={() => this.props.history.push('/checkout')}
                   disabled={!this.state.disableButton}
                 >
@@ -199,7 +197,7 @@ class Cart extends Component {
     else{
       return(
           <div>
-            <Typography component='h5' variant={'h5'} style={{marginTop:310, color:'#FFF'}}>
+            <Typography component='h5' variant={'h5'} style={{marginTop:240, color:'#FFF'}}>
               Il tuo ordine e' vuoto,
              </Typography>
              <Typography component='h7' variant={'h7'} style={{marginTop:5, color: '#FFF'}}>
@@ -209,7 +207,7 @@ class Cart extends Component {
                <div>
              <ShoppingCartOutlinedIcon style={{alignItems:'center', marginTop: 50, fontSize: 80, color: '#FF8C00'}} />
              </div>
-             <div style={{marginRight: 350}}>
+             <div style={{display:'flex', justifyContent:'center'}}>
                <Button
                  variant="contained"
                  color="primary"

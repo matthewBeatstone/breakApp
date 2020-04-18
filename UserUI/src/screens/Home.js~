@@ -91,7 +91,7 @@ class Home extends Component {
 
     render() {
       return (
-        <div style={{background:'#2C3539', width: 1020 ,height: 580 }}>
+        <div style={{background:'#2C3539', width: 1024 ,height:'100%'}}>
           <Header path='/index'/>
           <div style={{marginTop:10}}>
             <Grid container spacing={3}>

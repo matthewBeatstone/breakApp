@@ -65,12 +65,12 @@ export default class Beer extends Component {
   render(){
     return(
         <ScrollArea
-          speed={0.8}
+          speed={1.5}
           className="area"
           contentClassName="content"
           horizontal={false}
           style={{
-            height: 700,
+            height: 600,
             borderRadius:30
           }}
           >

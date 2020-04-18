@@ -63,7 +63,7 @@ export default class Sodas extends Component {
           contentClassName="content"
           horizontal={false}
           style={{
-            height: 700,
+            height: 600,
             borderRadius:30
           }}
           >

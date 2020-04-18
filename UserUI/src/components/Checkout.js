@@ -42,7 +42,7 @@ const content = {
 
 const summary = {
   width: 600,
-  height: 500,
+  height: 400,
   flexDirection: 'column',
   display: 'flex',
   backgroundColor: '#FF8C00',
@@ -105,7 +105,7 @@ class Checkout extends Component {
       return(
         <Bounce right>
         <Header path='/home'/>
-        <div style={{height: 900}}>
+        <div style={{height: '100%'}}>
           <div style={{display:'flex', flexDirection: 'row'}}>
             <div style={{display:'flex', flexDirection:'column'}}>
               <div style={{marginTop:20, marginLeft: 20, alignItems:'center'}}>
@@ -120,7 +120,7 @@ class Checkout extends Component {
                     className="area"
                     contentClassName="content"
                     horizontal={false}
-                    style={{height: 500}}
+                    style={{height: 400}}
                     >
                     {this.props.order.map((orderItem) => (
                       <div key={orderItem.title}>
@@ -144,7 +144,7 @@ class Checkout extends Component {
               </div>
             </div>
           </div>
-            <div style={{width: '90%', height:500, marginLeft: 300, backgroundColor: '#FF8C00',  marginTop: 50, borderRadius: 50, marginRight:20}}>
+            <div style={{width: '90%', height:400, marginLeft: 40, backgroundColor: '#FF8C00',  marginTop: 50, borderRadius: 50, marginRight:20}}>
               <div style={{display:'flex', justifyContent:'flex-start', marginLeft: 30, marginTop: 60}}>
               <FormControl component="fieldset">
                 <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
@@ -163,10 +163,10 @@ class Checkout extends Component {
             </div>
             <div style={{width: '90%', height: 'auto', position: 'absolute', bottom:50, justifyContent:'center'}}>
             </div>
-            <div style={{position: 'absolute', bottom: 40}}>
+            <div style={{position: 'absolute', bottom: 5, right: 30}}>
             <Link to='/receipt'>
               <Button
-                style={{width: 1920, height: 90, display:'flex', alignItems: 'center', background:'#FF8C00', borderRadius:50, position:'absolute'}}
+                style={{width: 310, height: 60, background:'#FF8C00', borderRadius:50}}
                 variant="contained"
                 color="primary"
                 label="invia il tuo ordine"

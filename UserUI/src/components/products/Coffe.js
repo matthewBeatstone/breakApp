@@ -99,7 +99,7 @@ export default class Coffe extends Component {
           contentClassName="content"
           horizontal={false}
           style={{
-            height: 700,
+            height: 600,
             borderRadius:30
           }}
           >

@@ -16,7 +16,7 @@ import Cocktail from './products/Cocktail.js';
 import Zoom from 'react-reveal/Zoom';
 
 const card = {
-  maxWidth: 345,
+  maxWidth: 2220,
   background:'#FF8C00',
   borderRadius:70
 };
@@ -26,20 +26,20 @@ const media = {
 
 const modal = {
   display: 'flex',
-  alignItems:'center',
+  alignItems:'flex-start',
   justifyContent: 'center',
   borderRadius:50
 };
 
 const modalContainer = {
-    width: 600,
-    height: 700,
+    width: 500,
+    height: 300,
     borderRadius: 30
 };
 
 const cardContainer = {
   height: 270,
-  width: 350,
+  width: 220,
   background:'#FF8C00',
   borderRadius:50,
   borderColor: '#FF8C00'
@@ -136,13 +136,13 @@ export default class ProductCategories extends Component {
     return(
       <div>
       <ScrollArea
-        speed={0.8}
+        speed={2}
         className="area"
         contentClassName="content"
         horizontal={false}
         style={{
-          width: 1200,
-          height: 894
+          width: 500,
+          height: 502  
         }}
         >
         <div>
