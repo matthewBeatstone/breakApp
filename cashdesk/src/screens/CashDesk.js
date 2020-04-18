@@ -5,7 +5,10 @@ import socketIOClient from "socket.io-client";
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import ScrollArea from 'react-scrollbar'
-import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import OrderActions from '../components/OrderActions.js'
+
+
 
 
 function mapStateToProps(state){
@@ -22,15 +25,27 @@ function mapDispatchToProps(dispatch){
 }
 
 const container = {
-  backgroundColor: '#FF8C00'
+  backgroundColor: '#FF8C00',
+  display:'flex',
+  justifyContent:'center',
+  alignItems:'center',
+  width: 600,
+  borderRadius: 50,
+  marginBottom: 10,
+  flexDirection: 'row'
+
 }
 
 const content = {
-    flex: '1 0 auto',
+    borderRadius: 50,
     background:'#FF8C00',
     marginTop: 20,
     borderRadius: 20,
-    flexDirection: 'column'
+    flexDirection: 'column',
+    borderRadius: 50,
+    justifyContent:'center',
+    display:'flex',
+    flexDirection: 'row'
   };
 
 
@@ -48,10 +63,12 @@ class CashDesk extends Component{
 
   componentDidMount () {
     const socket = this.state.socket
-    socket.on('order_table2', (order) => {
+    socket.on('order', (order) => {
       console.log(order)
       this.props.add_order(order)
     })
+    document.body.style.backgroundColor = '#2C3539'
+
   }
 
   getTotal(order){
@@ -65,36 +82,42 @@ class CashDesk extends Component{
 
   render(){
     console.log(this.props.cashdesk)
+    this.props.cashdesk.map(order => console.log(order))
     return(
       <ScrollArea
         speed={0.8}
         className="area"
         contentClassName="content"
         horizontal={false}
+        style={{display:'flex', justifyContent:'center', marginTop: 10, height: '80%'}}
         >
-      <div style={container}>
-      {this.props.cashdesk.map(order =>
-        <div key={order.id}>
-        <CardContent style={content}>
-          <Typography component='h4' variant='h4'>
-            {'tavolo  ' + order.table}
-          </Typography>
-          {order.order.map(item =>
-            <div key={item.title}>
-              <Typography component='h6' variant='h6'>
-                {item.quantity + ' '} {item.title}
-              </Typography>
+        {this.props.cashdesk.map(order => (
+          <div key={order.id} style={container}>
+            <div>
+              <CardContent style={content}>
+                <div>
+                  <Typography component='h4' variant='h4'>
+                    {'tavolo  ' + order.table}
+                  </Typography>
+                  {order.order.order.map(item => (
+                    <div key={item.title} style={{display:'flex'}}>
+                        <Typography component='h6' variant='h6'>
+                          {item.quantity + ' '} {item.title}
+                        </Typography>
+                    </div>
+                  ))
+                }
+                <Typography component='h3' variant='h3'>
+                {this.getTotal(order.order.order) + '€'}
+                </Typography>
+                </div>
+                <OrderActions id={order.id}  style={{alignItems:'center'}}/>
+              </CardContent>
             </div>
-          )
-        }
-        <Typography component='h3' variant='h3'>
-        {this.getTotal(order.order) + '€'}
-        </Typography>
-        </CardContent>
-        </div>
-    )
-  }
-  </div>
+          </div>
+      ))
+    }
+
   </ScrollArea>
 )
 }
