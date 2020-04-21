@@ -1,21 +1,12 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom'
 import ScrollArea from 'react-scrollbar'
 import {connect} from 'react-redux'
 import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import Card from '@material-ui/core/Card';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import Checkout from './Checkout.js';
-import LightSpeed from 'react-reveal/LightSpeed';
-import CardMedia from '@material-ui/core/CardMedia';
 import HeadShake from 'react-reveal/HeadShake';
-import {Link, withRouter} from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 
 const content = {
@@ -32,34 +23,12 @@ const container = {
   width: '100%',
 
 };
-const modalContainer = {
-    width: 1000,
-    height: 700,
-    backgroundColor: '#2C3539'
-};
-const modal = {
-  display: 'flex',
-  alignItems:'center',
-  justifyContent: 'center',
-};
-const summary = {
-  width: 500,
-  height: 400
-};
+
 const button = {
   width: 400,
   height: 60,
   borderRadius: 40,
   backgroundColor: '#FF8C00',
-}
-
-const buttonAbled = {
-  width: 670,
-  height: 60,
-  borderRadius: 40,
-  backgroundColor: '#FF8C00',
-  bottom: 20,
-  marginTop: 152
 }
 
 const cardMedia = {
@@ -166,7 +135,7 @@ class Cart extends Component {
                         <ShopCard
                           itemTitle={item.title}
                           quantity={item.quantity}
-                          itemCost = {item.itemCost}
+                          itemCost={item.itemCost}
                           />
                       </div>
                     </div>
@@ -200,7 +169,7 @@ class Cart extends Component {
             <Typography component='h5' variant={'h5'} style={{marginTop:240, color:'#FFF'}}>
               Il tuo ordine e' vuoto,
              </Typography>
-             <Typography component='h7' variant={'h7'} style={{marginTop:5, color: '#FFF'}}>
+             <Typography component='h6' variant={'h6'} style={{marginTop:5, color: '#FFF'}}>
                Per ordinare selezionare un articolo  e premere "aggiungi"
               </Typography>
 

@@ -6,7 +6,6 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import ScrollArea from 'react-scrollbar';
 import Grid from '@material-ui/core/Grid';
 import Beer from './products/Beer.js'
@@ -16,7 +15,7 @@ import Cocktail from './products/Cocktail.js';
 import Zoom from 'react-reveal/Zoom';
 
 const card = {
-  maxWidth: 2220,
+  maxWidth: 220,
   background:'#FF8C00',
   borderRadius:70
 };
@@ -38,7 +37,7 @@ const modalContainer = {
 };
 
 const cardContainer = {
-  height: 270,
+  height: 240,
   width: 220,
   background:'#FF8C00',
   borderRadius:50,
@@ -63,7 +62,7 @@ class ProductCard extends Component {
   render(){
     return (
       <div>
-      <button type="button" onClick={this.openModal.bind(this)} style={cardContainer}>
+      <div onClick={this.openModal.bind(this)} style={cardContainer}>
         <Card style={card}>
           <CardActionArea>
             <CardMedia
@@ -82,7 +81,7 @@ class ProductCard extends Component {
           </CardActionArea>
 
         </Card>
-      </button>
+        </div>
 
       <Modal
         aria-labelledby="transition-modal-title"
@@ -134,7 +133,7 @@ export default class ProductCategories extends Component {
 
   render(){
     return(
-      <div>
+      <div style={{marginTop:10}}>
       <ScrollArea
         speed={2}
         className="area"
@@ -142,7 +141,7 @@ export default class ProductCategories extends Component {
         horizontal={false}
         style={{
           width: 500,
-          height: 502  
+          height: 502
         }}
         >
         <div>

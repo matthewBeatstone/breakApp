@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
 import ScrollArea from 'react-scrollbar'
-import ItemCard from './ItemCard.js';
-import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
 import {connect} from 'react-redux'
-import TextField from '@material-ui/core/TextField';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import EuroIcon from '@material-ui/icons/Euro';
@@ -16,7 +12,6 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import {withRouter, Link} from 'react-router-dom';
 import Bounce from 'react-reveal/Bounce';

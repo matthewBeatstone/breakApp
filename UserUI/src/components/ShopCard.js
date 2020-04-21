@@ -1,12 +1,8 @@
 import React, {Component} from 'react';
-import CardContent from '@material-ui/core/CardContent';
 import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
 import CancelIcon from '@material-ui/icons/Cancel';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
-import HighlightOffTwoToneIcon from '@material-ui/icons/HighlightOffTwoTone';
-import LightSpeed from 'react-reveal/LightSpeed';
 
 
 import {connect} from 'react-redux';
@@ -16,11 +12,6 @@ import {connect} from 'react-redux';
 const details = {
     display: 'flex',
     flexDirection: 'column',
-  };
-
-const content = {
-    flex: '1 0 auto',
-    background:'#FF8C00',
   };
 
 const controls = {
@@ -88,6 +79,7 @@ class ShopCard extends Component {
 
 
   }
+  
 
   render(){
     return (
@@ -102,7 +94,7 @@ class ShopCard extends Component {
             <IconButton aria-label="next" onClick={this.add.bind(this)} >
               <AddCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
-            <CancelIcon style = {{fontSize:40, marginLeft:30}}onClick={() => this.props.remove_item(this.state.title)}/>
+            <CancelIcon style={{fontSize:40, marginLeft:30}} onClick={() => this.props.remove_item(this.state.title)}/>
           </div>
         </div>
     </div>

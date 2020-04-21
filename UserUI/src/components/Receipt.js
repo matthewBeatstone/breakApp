@@ -1,50 +1,11 @@
 import React, {Component} from 'react';
-import ScrollArea from 'react-scrollbar'
-import ItemCard from './ItemCard.js';
-import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
 import {connect} from 'react-redux'
 import TextField from '@material-ui/core/TextField';
-import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import EuroIcon from '@material-ui/icons/Euro';
-import CreditCardIcon from '@material-ui/icons/CreditCard';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormControl from '@material-ui/core/FormControl';
-import FormLabel from '@material-ui/core/FormLabel';
 import Keyboard from './Keyboard.js';
-import 'react-simple-keyboard/build/css/index.css';
 import Bounce from 'react-reveal/Bounce';
 
-
-import io from 'socket.io-client'
-
-
-
-
-const content = {
-    background:'#2C3539',
-    borderRadius: 20,
-    marginTop: 20,
-    height: 20,
-    width: '90%',
-    alignItems: 'center',
-    marginLeft: 10
-
-  };
-
-const summary = {
-  width: 600,
-  height: 500,
-  flexDirection: 'column',
-  display: 'flex',
-  backgroundColor: '#FF8C00',
-  borderRadius: 50,
-}
 
 function mapStateToProps(state){
   return{
@@ -87,9 +48,9 @@ class Receipt extends Component {
   }
 
   onSubmit() {
-
+    var order = '';
     this.props.order.map(item => {
-        this.state.SmsBody= this.state.SmsBody + ' ' + item.quantity + ' ' + item.title + ' ' + item.totCost + ';  '
+        order = order + ' ' + item.quantity + ' ' + item.title + ' ' + item.totCost + ';  '
     })
 
 

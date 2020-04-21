@@ -1,24 +1,7 @@
 import React, { Component } from 'react';
-import '../App.css';
-import Header from '../components/Header.js';
-import ProductCategories from '../components/ProductCard.js'
-import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
-import {connect} from 'react-redux'
-import ScrollArea from 'react-scrollbar'
-import ShopCard from '../components/ShopCard.js'
 import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Cart from '../components/Cart.js'
-import io from 'socket.io-client'
-import Checkout from '../components/Checkout.js';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import RoomServiceOutlinedIcon from '@material-ui/icons/RoomServiceOutlined';
-
-
 import {Link} from 'react-router-dom'
 
 
