@@ -3,49 +3,9 @@ import '../App.css';
 import Header from '../components/Header.js';
 import ProductCategories from '../components/ProductCard.js'
 import Grid from '@material-ui/core/Grid';
-import GridList from '@material-ui/core/GridList';
 import {connect} from 'react-redux'
-import ScrollArea from 'react-scrollbar'
-import ShopCard from '../components/ShopCard.js'
-import Typography from '@material-ui/core/Typography';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Cart from '../components/Cart.js'
-import io from 'socket.io-client'
-import Checkout from '../components/Checkout.js';
-import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 
-
-
-const modal = {
-  display: 'flex',
-  alignItems:'center',
-  justifyContent: 'center',
-};
-
-const content = {
-    flex: '1 0 auto',
-    background:'#FF8C00',
-    marginTop: 20,
-  };
-
-const button = {
-  width: 390,
-  height: 60,
-  borderRadius: 40,
-  backgroundColor: '#FF8C00',
-}
-const modalContainer = {
-    width: 1000,
-    height: 700,
-    backgroundColor: '#2C3539'
-};
-
-const summary = {
-  witdh: 500,
-  heigh: 400
-}
 
 
 

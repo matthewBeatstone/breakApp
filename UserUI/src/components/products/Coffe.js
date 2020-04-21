@@ -4,9 +4,6 @@ import ItemCard from '../ItemCard.js';
 import Radio from '@material-ui/core/Radio';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from  '@material-ui/core/Typography';
-import UndoIcon from '@material-ui/icons/Undo';
-import IconButton from '@material-ui/core/IconButton';
 import FormLabel from '@material-ui/core/FormLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
@@ -15,11 +12,6 @@ import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import RadioGroup from '@material-ui/core/RadioGroup';
 
-
-const content = {
-    flex: '1 0 auto',
-    borderRadius: 30
-  };
 
 
 export default class Coffe extends Component {
