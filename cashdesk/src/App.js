@@ -7,7 +7,8 @@ import {createStore} from 'redux'
 import CashDesk from './screens/CashDesk.js'
 
 const initCashdesk ={
-  cashdesk : []
+  cashdesk : [],
+  orderHistory: []
 }
 
 const reducer = (state = initCashdesk, action) => {
@@ -15,7 +16,8 @@ const reducer = (state = initCashdesk, action) => {
     case 'ADD_ORDER':
         return {
           ...state,
-          cashdesk: [action.order, ...state.cashdesk]
+          cashdesk: [action.order, ...state.cashdesk],
+          orderHistory: [action.order, ...state.orderHistory]
         }
 
     case 'REMOVE_ITEM':

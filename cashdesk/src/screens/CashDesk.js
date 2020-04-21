@@ -111,7 +111,7 @@ class CashDesk extends Component{
                 {this.getTotal(order.order.order) + '€'}
                 </Typography>
                 </div>
-                <OrderActions id={order.id}  style={{alignItems:'center'}}/>
+                <OrderActions id={order.id} />
               </CardContent>
             </div>
           </div>

@@ -16,7 +16,7 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel';
-import Keyboard from 'react-simple-keyboard';
+import Keyboard from './Keyboard.js';
 import 'react-simple-keyboard/build/css/index.css';
 import Bounce from 'react-reveal/Bounce';
 
@@ -59,7 +59,7 @@ class Receipt extends Component {
       modalState : false,
       tot: '',
       phoneNumber: '',
-      body: '',
+      SmsBody: '',
       submitting: false,
       error: false,
       showKeyboard: true,
@@ -86,33 +86,39 @@ class Receipt extends Component {
     this.setState({modalState: false})
   }
 
-  send_order = () => {
-    const socket = io('http://127.0.0.1:8080');
-    socket.emit('orders', this.props.order)
-  }
+  onSubmit() {
 
-  onSubmit(event) {
-    event.preventDefault();
+    this.props.order.map(item => {
+        this.state.SmsBody= this.state.SmsBody + ' ' + item.quantity + ' ' + item.title + ' ' + item.totCost + ';  '
+    })
+
+
     fetch('http://127.0.0.1:8080/api/messages', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
         phoneNumber: this.state.phoneNumber,
-        messageBody: this.porp.order,
-        name: this.state.name,
-        paymentMethod: this.state.payment
+        smsBody: this.state.SmsBody
       })
-    })
-      .then(res => res.json())
-      .then(data => {
-        if (data.success) {
-          console.log('sent')
-        } else {
-          console.log('error')
-        }
+     })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        console.log('sent')
+      } else {
+        console.log('error')
+      }
     });
-}
+    console.log(this.state.SmsBody)
 
+  }
+
+  handleKeyboard(key){
+    this.setState({phoneNumber: this.state.phoneNumber + key})
+  }
+  handleCanc(){
+    this.setState({phoneNumber: this.state.phoneNumber.substring(0, this.state.phoneNumber.length-1)})
+  }
 
 
   render(){
@@ -120,29 +126,36 @@ class Receipt extends Component {
     if(!this.props.order.length !== 0){
       return(
         <Bounce right>
-        <div style={{height: 900}}>
-          <div style={{display:'flex', justifyContent:'center'}}>
-              <form style={{width:400, display:'flex', justifyContent: 'center'}} noValidate autoComplete="off">
-                <TextField
-                  id="standard-basic"
-                  label="Tel."
-                  style={{width:400, marginTop: 20}}
-                  value={this.state.phoneNumber}
-                  onChange={(input) => this.setState({phoneNumber: input.target.value})}
-                  value={this.state.phoneNumber} />
-              </form>
+          <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            <div>
+            <Typography component='h5' variant='h5' style={{color: 'white', marginTop: 50}}>
+              Inserisci il tuo numero e ricevi lo scontrino via sms
+            </Typography>
+            </div>
+            <div style={{display:'flex', justifyContent:'center'}}>
+                <form noValidate autoComplete="off" style={{backgroundColor: '#FF8C00', borderRadius: 20, width: 400, marginTop:10}}>
+                  <TextField
+                    id="standard-basic"
+                    label="Tel."
+                    style={{width:400}}
+                    value={this.state.phoneNumber}
+                    onChange={(input) => this.setState({phoneNumber: input.target.value})}
+                    value={this.state.phoneNumber} />
+                </form>
+            </div>
+              <Button
+                style={{width: 200, height: 90, marginLeft: 30, marginTop: 50, background:'#FF8C00', borderRadius:50}}
+                variant="contained"
+                color="primary"
+                label="invia il tuo ordine"
+                onClick={this.onSubmit.bind(this)}>
+                Invia SMS
+              </Button>
           </div>
-          <div style={{position: 'absolute', bottom: 40}}>
-            <Button
-              style={{width: 1920, height: 90, display:'flex', alignItems: 'center', background:'#FF8C00', borderRadius:50, position:'absolute'}}
-              variant="contained"
-              color="primary"
-              label="invia il tuo ordine"
-              onClick={this.onSubmit}>
-              Invia il tuo ordine
-            </Button>
+          <div style={{display:'flex', justifyContent:'center', marginTop: 80}}>
+            <Keyboard show={true} handleKey={this.handleKeyboard.bind(this)} canc={this.handleCanc.bind(this)}/>
           </div>
-        </div>
+
         </Bounce>
       )
     }
