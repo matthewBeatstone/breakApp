@@ -16,6 +16,8 @@ import Bounce from 'react-reveal/Bounce';
 
 const init_order = {
   order : [],  //initial order stack
+  catalog: []
+
 }
 
 const reducer = (state = init_order, action) => {
@@ -45,8 +47,6 @@ const reducer = (state = init_order, action) => {
         return {...state, order: [...state.order, action.item]}
       }
 
-
-
     case 'UPDATE_CART':
       console.log(action.cost)
       return {
@@ -64,6 +64,11 @@ const reducer = (state = init_order, action) => {
         order: state.order.filter(item =>
           item.title.localeCompare(action.title) !==0
         )
+      }
+    case 'FETCH_CATALOG':
+      return {
+        ...state,
+        catalog: action.fetchedCatalog
       }
 
   }

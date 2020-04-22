@@ -3,7 +3,19 @@ import Typography from '@material-ui/core/Typography';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import RoomServiceOutlinedIcon from '@material-ui/icons/RoomServiceOutlined';
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux';
 
+function mapStateToProps(state){
+  return{
+    catalog: state.catalog
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return{
+    fetch_catalog : (data) => dispatch({type:'FETCH_CATALOG', fetchedCatalog: data})
+  }
+}
 
 
 
@@ -29,7 +41,20 @@ class Index extends Component {
   }
   componentDidMount() {
     document.body.style.backgroundColor = '#2C3539'
-}
+
+    fetch('http://127.0.0.1:8080/api/catalog')
+      .then(res => res.json())
+        .then((data) => {
+          this.props.fetch_catalog(data.categories)
+          console.log(data)
+          console.log(data.categories[0].items)
+          data.categories.map(cat => {
+            console.log(cat.items)
+          })
+        })
+      }
+
+
 
     render() {
       return (
@@ -70,4 +95,4 @@ class Index extends Component {
 
 
 
-export default Index
+export default connect(mapStateToProps, mapDispatchToProps)(Index)
