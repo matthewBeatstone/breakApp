@@ -9,12 +9,13 @@ import Backdrop from '@material-ui/core/Backdrop';
 import ScrollArea from 'react-scrollbar';
 import Grid from '@material-ui/core/Grid';
 import Beer from './products/Beer.js'
-import Coffe from './products/Coffe.js'
 import Sodas from './products/Sodas.js'
 import Cocktail from './products/Cocktail.js';
 import Zoom from 'react-reveal/Zoom';
 import ItemCard from './ItemCard.js';
-import {connect} from 'react-redux'
+import {connect} from 'react-redux';
+import GridList from '@material-ui/core/GridList';
+import OptionsCard from './OptionsCard.js'
 
 
 const card = {
@@ -73,55 +74,51 @@ class ProductCard extends Component {
   render(){
     return (
       <div>
-      {this.props.catalog.map((cat) => (
-        <div>
+        <div style={{marginBottom: 70}}>
           <div onClick={this.openModal.bind(this)} style={cardContainer}>
             <Card style={card}>
               <CardActionArea>
                 <CardMedia
                   style={media}
-                  image={cat.pic}
+                  image={`data:image/png;base64,${this.props.pic}`}
                   title="categoryImage"
                 />
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                    {cat.title}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" component="p">
-                    subtitle
+                    {this.props.title}
                   </Typography>
                 </CardContent>
               </CardActionArea>
-
             </Card>
             </div>
 
-        <Modal
-          aria-labelledby="transition-modal-title"
-          aria-describedby="transition-modal-description"
-          style={modal}
-          open={this.state.modalState}
-          onClose={this.closeModal.bind(this)}
-          closeAfterTransition
-          BackdropComponent={Backdrop}
-          BackdropProps={{
-            timeout: 1000,
-          }}
-        >
-          <Zoom left cascade when={this.state.modalState}>
+            <Modal
+              aria-labelledby="transition-modal-title"
+              aria-describedby="transition-modal-description"
+              style={modal}
+              open={this.state.modalState}
+              onClose={this.closeModal.bind(this)}
+              closeAfterTransition
+              BackdropComponent={Backdrop}
+              BackdropProps={{
+                timeout: 1000,
+              }}
+            >
             <div style={modalContainer}>
-
-              {cat.items.map(item => (
-                <ItemCard itemTitle={item.title} itemCost={item.cost} itemPic={item.img} />
-
+            <ScrollArea
+                speed={1.5}
+                className="area"
+                contentClassName="content"
+                horizontal={false}
+                >
+              {this.props.items.map(item => (
+                <ItemCard itemTitle={item.title} itemCost={item.cost} itemPic={item.pic} options={item.option} />
               ))}
+              </ScrollArea>
+
+              </div>
+            </Modal>
             </div>
-          </Zoom>
-        </Modal>
-
-        </div>
-
-      ))}
       </div>
     );
   }

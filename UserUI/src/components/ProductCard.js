@@ -9,13 +9,14 @@ import Backdrop from '@material-ui/core/Backdrop';
 import ScrollArea from 'react-scrollbar';
 import Grid from '@material-ui/core/Grid';
 import Beer from './products/Beer.js'
-import Coffe from './products/Coffe.js'
 import Sodas from './products/Sodas.js'
 import Cocktail from './products/Cocktail.js';
 import Zoom from 'react-reveal/Zoom';
 import ItemCard from './ItemCard.js';
 import ProductCard from './Products.js'
-
+import GridList from '@material-ui/core/GridList';
+import {connect} from 'react-redux'
+import GridListTile from '@material-ui/core/GridListTile';
 
 const card = {
   maxWidth: 220,
@@ -47,30 +48,18 @@ const cardContainer = {
   borderColor: '#FF8C00'
 };
 
+function mapStateToProps(state){
+  return{
+    catalog: state.catalog
+  }
+}
 
 class ProductCategories extends Component {
 
   constructor(props){
     super(props);
-
-    this.state = {
-      modalState: false,
-    }
-
-    this.beerImg = require('../assets/images/beer.jpg')
-    this.coffeImg = require('../assets/images/coffe.jpeg')
-    this.sodasImg = require('../assets/images/sodas.jpg')
-    this.cocktailImg = require('../assets/images/cocktail.jpg')
-    this.dolciImg = require('../assets/images/dolci.jpg')
-    this.amariImg = require('../assets/images/amari.jpg')
   }
 
-  openModal(){
-    this.setState({modalState: true})
-  }
-  closeModal(){
-    this.setState({modalState: false})
-  }
 
 
   render(){
@@ -83,20 +72,21 @@ class ProductCategories extends Component {
         horizontal={false}
         style={{
           width: 500,
-          height: 502
+          height: 600
         }}
         >
-        <div>
-          <Grid container spacing={3}>
-            <Grid item xs={12} sm={6}>
-              <ProductCard  />
-            </Grid>
-          </Grid>
-      </div>
+        <GridList cols={2}>
+        {this.props.catalog.map(cat => (
+          <div>
+            <ProductCard title={cat.title} pic={cat.pic} items={cat.items}  />
+          </div>
+        ))}
+        </GridList>
+
     </ScrollArea>
     </div>
     )
   }
 
 }
-export default ProductCategories
+export default connect(mapStateToProps)(ProductCategories)

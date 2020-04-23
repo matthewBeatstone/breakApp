@@ -4,7 +4,6 @@ var uniqid = require('uniqid');
 var cors = require('cors');
 const dotenv = require('dotenv');
 dotenv.config();
-const pino = require('express-pino-logger')();
 const client = require('twilio')(process.env.SID, process.env.TOKEN);
 
 var app = express();
@@ -55,3 +54,30 @@ app.post('/api/messages', (req, res) => {
       res.send(JSON.stringify({ success: false }));
     });
 });
+
+const fs = require('fs');
+
+let rawdata = fs.readFileSync('catalog.json');
+let catalog = JSON.parse(rawdata);
+console.log(catalog);
+
+
+function base64_encode(file) {
+    var bitmap = fs.readFileSync(file);
+    return new Buffer(bitmap).toString('base64');
+}
+
+catalog.categories.map(cat => {
+	var image = cat.pic
+	cat.pic = base64_encode(image)
+	cat.items.map(item => {
+		var item_pic = item.pic
+		item.pic = base64_encode(item_pic)
+	})
+})
+
+console.log(catalog)
+
+app.get('/api/catalog', (req, res) => {
+	res.json(catalog)
+})

@@ -1,0 +1,134 @@
+{
+	"categories": [
+		{"title": "Birra",
+		 "pic" : "./images/beer.jpg",
+		 "items": [
+			{
+				"title": "Heineken",
+				"cost" : 3.5,
+				"pic": "./images/heineken.jpg",
+				"option":[] ,
+				"format":[]	
+			},
+			{
+				"title": "Becks",
+				"cost" : 3.5,
+				"pic":  "./images/becks.jpg",	
+				"option": [],
+				"format": []
+			},
+			{
+				"title": "Ceres",
+				"cost" : 3.5,
+				"pic": "./images/ceres.jpg",	
+				"option": [],
+				"format": []
+			},
+			{
+				"title": "Birra chiara alla Spina (20cl)",
+				"cost" : 3,
+				"pic": "./images/spinaChiara.png",	
+				"option": [],
+				"format": []
+			},
+			{
+				"title": "Birra chiara alla Spina (40cl)",
+				"cost" : 3,
+				"pic": "./images/spinaChiara.png",	
+				"option": [],
+				"format": []
+			},
+			{
+				"title": "Corona",
+				"cost" : 3.5,
+				"pic": "./images/corona.png",	
+				"option": [],
+				"format": []
+			}	
+		 ]
+		},
+		{"title": "Caffetteria",
+		 "pic" : "./images/coffe.jpeg",
+		 "items": [
+			{
+				"title": "Caffe",
+				"cost" : 1.1,
+				"pic": "./images/tazzina.jpeg",
+				"option":[
+					{"type": "decaffeinato", "cost": null},
+		      			{"type": "corretto", "cost": 0.5},
+		      			{"type": "marocchino", "cost": 0.9},
+		      			{"type": "orzo", "cost": 0.5},
+		      			{"type": "gingseng", "cost": 0.5},
+		     			{"type": "latte", "cost": 0.3}
+				],
+				"format": [
+					{"type": "tazza grande", "cost": 0.5}, 
+					{"type": "tazza grande", "cost": 0.5}
+				]
+		      
+			},
+			{
+				"title": "cappuccino",
+				"cost" : 1.6,
+				"pic":  "./images/cappuccino.jpg",
+				"option": [],
+				"format": []
+			},
+			{
+				"title": "Cioccolata",
+				"cost" : 3,
+				"pic": "./images/cioccolata.jpg",	
+				"option": [],	
+				"format": []
+			}
+		 ]
+		},
+		{"title": "Aperitivi",
+			 "pic" : "./images/cocktail.jpg",
+			 "items": [
+				{
+					"title": "Campari Soda",
+					"cost" : 3,
+					"pic": "./images/campariSoda.jpeg",
+					"option":[] ,
+					"format":[]	
+				},
+				{
+					"title": "Crodino",
+					"cost" : 3,
+					"pic":  "./images/crodino.jpg",	
+					"option": [],
+					"format": []
+				},
+				{
+					"title": "Aperol Soda",
+					"cost" : 3.5,
+					"pic": "./images/aperolSoda.jpeg",	
+					"option": [],
+					"format": []
+				},
+				{
+					"title": "Spritz",
+					"cost" : 5,
+					"pic": "./images/spritz.jpeg",	
+					"option": [],
+					"format": []
+				},
+				{
+					"title": "Hugo",
+					"cost" : 5,
+					"pic": "./images/hugo.jpeg",	
+					"option": [],
+					"format": []
+				}
+					
+			 ]
+			}
+
+
+				
+
+		
+	]
+}
