@@ -50,7 +50,7 @@ const cardContainer = {
 
 function mapStateToProps(state){
   return{
-    catalog: state.catalog
+    catalog: state.catalog,
   }
 }
 
@@ -71,13 +71,13 @@ class ProductCategories extends Component {
         contentClassName="content"
         horizontal={false}
         style={{
-          width: 500,
-          height: 600
+          width: this.props.width,
+          height: this.props.height
         }}
         >
-        <GridList cols={2}>
+        <GridList cols={this.props.cols}>
         {this.props.catalog.map(cat => (
-          <div>
+          <div style={{marginRight:70, marginBottom:70}}>
             <ProductCard title={cat.title} pic={cat.pic} items={cat.items}  />
           </div>
         ))}

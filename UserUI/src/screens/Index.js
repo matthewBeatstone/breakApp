@@ -5,6 +5,8 @@ import RoomServiceOutlinedIcon from '@material-ui/icons/RoomServiceOutlined';
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom'
+import MediaQuery from 'react-responsive';
+
 
 function mapStateToProps(state){
   return{
@@ -59,6 +61,8 @@ class Index extends Component {
 
     render() {
       return (
+        <div>
+        <MediaQuery minDeviceWidth={1024}>
         <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '13%', flexDirection:'column'}}>
           <div style={{display:'flex', flexDirection:'row'}}>
             <div style={{marginRight: 100}}>
@@ -90,6 +94,41 @@ class Index extends Component {
             </div>
             </div>
             </div>
+          </MediaQuery>
+          <MediaQuery maxDeviceWidth={1024}>
+          <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop: '13%', flexDirection:'column'}}>
+            <div style={{display:'flex', flexDirection:'column'}}>
+              <div>
+              <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10}}
+                   onClick={() => this.props.history.push('/home')}
+              >
+                <div style={container}>
+                  <FastfoodIcon style={{fontSize: 170}} />
+                </div>
+              </div>
+                <Typography component='h3' variant='h3' style={{color: 'white'}}>
+                  Ordina
+                </Typography>
+              </div>
+              <div>
+                <div>
+                <div style={{background:'#FF8C00', borderRadius:100, width: 250, height:250, alignItems:'center', display:'flex', justifyContent:'center', marginBottom:10}}
+                     onClick={() => this.props.history.push('/home')}
+                >
+                  <div style={container}>
+                    <RoomServiceOutlinedIcon style={{fontSize: 170}} />
+                  </div>
+                </div>
+                  <Typography component='h3' variant='h3' style={{color: 'white'}}>
+                    Assistenza
+                  </Typography>
+
+                </div>
+              </div>
+              </div>
+              </div>
+          </MediaQuery>
+          </div>
     );
   }
 }

@@ -14,6 +14,13 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import Checkbox from '@material-ui/core/Checkbox';
 import RadioGroup from '@material-ui/core/RadioGroup';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+
+
+
 
 
 export default class OptionsCard extends Component {
@@ -25,10 +32,7 @@ export default class OptionsCard extends Component {
       coffeFormat: '',
       coffeCost: 1.1,
       options: this.props.options,
-      format: [
-        {type: 'tazza grande', cost:0.5},
-        {type: 'tazza piccola', cost: null}
-      ]
+      formats: this.props.formats
     }
     console.log(this.state.options)
   }
@@ -37,37 +41,37 @@ export default class OptionsCard extends Component {
   render(){
     if(this.state.options.length !== 0){
       return(
-          <ScrollArea
-            speed={0.8}
-            className="area"
-            contentClassName="content"
-            horizontal={false}
-            style={{
-              height: 200,
-            }}
-            >
+        <ExpansionPanel style={{display:'flex', backgroundColor:'#FF8C00'}}>
+          <ExpansionPanelSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+          >
+            <Typography> opzioni</Typography>
+          </ExpansionPanelSummary>
+          <ExpansionPanelDetails>
               <div style={{flexDirection:'row', display:'flex'}}>
                 <div>
                   <FormControl component="fieldset">
                     <FormGroup>
                     <ScrollArea
-                      speed={0.8}
+                      speed={2}
                       className="area"
                       contentClassName="content"
                       horizontal={false}
                       style={{
-                        height: 250,
+                        height: 150,
                       }}
                       >
-                      {this.state.options.map(coffe => (
-                        <div key={coffe.type}>
+                      {this.state.options.map(option => (
+                        <div key={option.type}>
                         <FormControlLabel
                           control={
                             <Checkbox
-                              name={coffe.type}
-                              onChange={(event) => this.props.handleCheckBox(event, coffe.cost)} />
+                              name={option.type}
+                              onChange={(event) => this.props.handleCheckBox(event, option.cost)} />
                           }
-                          label={coffe.type}
+                          label={option.type}
                         />
                         </div>
                       ))}
@@ -75,9 +79,19 @@ export default class OptionsCard extends Component {
                     </FormGroup>
                   </FormControl>
                 </div>
+                <div>
+                <FormControl component="fieldset">
+                    <RadioGroup aria-label="gender" name="format"  onChange={(event) => this.props.handleRadio(event)}>
+                      {this.state.formats.map(format => (
+                          <FormControlLabel value={format.type} control={<Radio />} label={format.type} />
+                      ))}
+                      </RadioGroup>
+                </FormControl>
+                </div>
               </div>
+            </ExpansionPanelDetails>
+            </ExpansionPanel>
 
-          </ScrollArea>
       )
     }
     else{

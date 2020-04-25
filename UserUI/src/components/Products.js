@@ -29,14 +29,14 @@ const media = {
 
 const modal = {
   display: 'flex',
-  alignItems:'flex-start',
+  alignItems:'center',
   justifyContent: 'center',
   borderRadius:50
 };
 
 const modalContainer = {
-    width: 500,
-    height: 300,
+    width: 400,
+    height: 600,
     borderRadius: 30
 };
 
@@ -73,8 +73,7 @@ class ProductCard extends Component {
 
   render(){
     return (
-      <div>
-        <div style={{marginBottom: 70}}>
+        <div>
           <div onClick={this.openModal.bind(this)} style={cardContainer}>
             <Card style={card}>
               <CardActionArea>
@@ -91,7 +90,6 @@ class ProductCard extends Component {
               </CardActionArea>
             </Card>
             </div>
-
             <Modal
               aria-labelledby="transition-modal-title"
               aria-describedby="transition-modal-description"
@@ -110,16 +108,23 @@ class ProductCard extends Component {
                 className="area"
                 contentClassName="content"
                 horizontal={false}
+                style={{height: 600}}
                 >
               {this.props.items.map(item => (
-                <ItemCard itemTitle={item.title} itemCost={item.cost} itemPic={item.pic} options={item.option} />
+                <div key={item.title} style={{justifyContent:'flex-start'}}>
+                  <ItemCard
+                    itemTitle={item.title}
+                    itemCost={item.cost}
+                    itemPic={item.pic}
+                    options={item.option}
+                    formats={item.format} />
+                </div>
               ))}
               </ScrollArea>
 
               </div>
             </Modal>
             </div>
-      </div>
     );
   }
 }

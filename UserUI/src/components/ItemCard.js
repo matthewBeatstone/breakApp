@@ -19,6 +19,8 @@ import RadioGroup from '@material-ui/core/RadioGroup';
 import ScrollArea from 'react-scrollbar'
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 
@@ -36,6 +38,8 @@ function mapDispatchToProps(dispatch){
     })
   }
 }
+
+
 
 
 const card = {
@@ -71,19 +75,6 @@ const button = {
   backgroundColor: '#FF8C00',
   borderRadius:30
 }
-const modal = {
-  display: 'flex',
-  alignItems:'flex-start',
-  justifyContent: 'center',
-  borderRadius:50
-};
-
-const modalContainer = {
-    width: 500,
-    height: 300,
-    borderRadius: 30
-};
-
 
 
 class ItemCard extends Component {
@@ -95,7 +86,9 @@ class ItemCard extends Component {
       title : this.props.itemTitle,
       itemCost : this.props.itemCost,
       options: this.props.options,
-      pic: `data:image/png;base64,${this.props.itemPic}`
+      pic: `data:image/png;base64,${this.props.itemPic}`,
+      format: '',
+      snackbar:false
     }
   }
 
@@ -106,6 +99,19 @@ class ItemCard extends Component {
     if(this.state.quantity > 1)
       this.setState({quantity: this.state.quantity-1})
   }
+
+  addItemToCart(){
+    this.props.add_item({
+      title: this.state.title,
+      quantity: this.state.quantity,
+      totCost:   ((this.state.itemCost*10)*this.state.quantity)/10,
+      itemCost: this.state.itemCost,
+      itemPic: this.state.pic
+    })
+    this.setState({snackbar: true})
+  }
+
+
 
   handleCheckBox(event, cost){
     if(event.target.checked)
@@ -124,25 +130,26 @@ class ItemCard extends Component {
     console.log(event.target.name)
   }
 
-  handleRadio = (event) => {
-    this.setState({coffeFormat: event.target.value})
-
+  handleRadio(event){
+    this.setState({format: event.target.value})
   }
 
   render(){
     return (
+      <div>
       <Card style={card}>
       <div>
-      <CardMedia
-        style={cover}
-        image={this.state.pic}
-        title="itemPic"
-      />
+        <CardMedia
+          style={cover}
+          image={this.state.pic}
+          title="itemPic"
+        />
       </div>
+      <div>
         <div style={details}>
           <CardContent style={content}>
             <Typography component="h5" variant="h5">
-              {this.state.title}
+              {this.state.title + ' ' + this.state.format}
             </Typography>
             <Typography component="h5" variant="h5">
               {this.state.itemCost + '€'}
@@ -160,25 +167,31 @@ class ItemCard extends Component {
             variant="contained"
             color="primary"
             style={button}
-            onClick={() => this.props.add_item({
-              title: this.state.title,
-              quantity: this.state.quantity,
-              totCost:   ((this.state.itemCost*10)*this.state.quantity)/10,
-              itemCost: this.state.itemCost,
-              itemPic: this.state.pic
-            })}>
+            onClick={this.addItemToCart.bind(this)}>
 
               Aggiungi
             </Button>
           </div>
-            <div style={{flexDirection:'row', display:'flex', justifyContent:'flex-start'}}>
-              <div>
-                  <OptionsCard options={this.props.options} handleCheckBox={this.handleCheckBox.bind(this)}/>
-              </div>
-          </div>
         </div>
-
+        </div>
       </Card>
+      <OptionsCard
+        options={this.props.options}
+        formats={this.props.formats}
+        handleCheckBox={this.handleCheckBox.bind(this)}
+        handleRadio={this.handleRadio.bind(this)}
+        />
+      <div style={{position:'absolute', bottom: 3}}>
+        <Snackbar open={this.state.snackbar} autoHideDuration={2000} style={{width: 500}}>
+          <MuiAlert elevation={6} variant="filled">
+            Aggiunto al Carrello!
+          </MuiAlert>
+        </Snackbar>
+
+      </div>
+      </div>
+
+
     );
   }
 }
