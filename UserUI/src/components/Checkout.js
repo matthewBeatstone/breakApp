@@ -15,7 +15,9 @@ import FormLabel from '@material-ui/core/FormLabel';
 import 'react-simple-keyboard/build/css/index.css';
 import {withRouter, Link} from 'react-router-dom';
 import Bounce from 'react-reveal/Bounce';
-import Header from './Header.js'
+import Header from './Header.js';
+import MediaQuery from 'react-responsive';
+
 
 
 
@@ -31,13 +33,22 @@ const content = {
     height: 20,
     width: '90%',
     alignItems: 'center',
-    marginLeft: 10
+    justifyContent:'center'
 
   };
 
 const summary = {
   width: 600,
   height: 400,
+  flexDirection: 'column',
+  display: 'flex',
+  backgroundColor: '#FF8C00',
+  borderRadius: 50,
+}
+
+const summaryMobile = {
+  width: 330,
+  height: 270,
   flexDirection: 'column',
   display: 'flex',
   backgroundColor: '#FF8C00',
@@ -99,7 +110,7 @@ class Checkout extends Component {
     if(!this.props.order.length !== 0){
       return(
         <Bounce right>
-        <Header path='/home'/>
+        <Header path='/home' order={this.props.order.length}/>
         <div style={{height: '100%'}}>
           <div style={{display:'flex', flexDirection: 'row'}}>
             <div style={{display:'flex', flexDirection:'column'}}>
@@ -109,6 +120,7 @@ class Checkout extends Component {
                   </Typography>
               </div>
               <div style={{marginLeft: 20}}>
+              <MediaQuery minDeviceWidth={800}>
                 <Card style={summary}>
                   <ScrollArea
                     speed={0.8}
@@ -127,11 +139,35 @@ class Checkout extends Component {
                         </div>
                         </CardContent>
                       </div>
-                        )
-                      )
-                    }
+                    ))}
                   </ScrollArea>
                 </Card>
+                </MediaQuery>
+                <MediaQuery maxDeviceWidth={700}>
+                  <div style={{display:'flex', justifyContent:'center'}}>
+                  <Card style={summaryMobile}>
+                    <ScrollArea
+                      speed={1}
+                      className="area"
+                      contentClassName="content"
+                      horizontal={false}
+                      style={{height: 400}}
+                      >
+                      {this.props.order.map((orderItem) => (
+                        <div key={orderItem.title}>
+                          <CardContent style={content}>
+                          <div>
+                            <Typography component='h5' variant='h5' style={{color:'#FF8C00'}}>
+                              {orderItem.quantity + ' ' +orderItem.title}
+                            </Typography>
+                          </div>
+                          </CardContent>
+                        </div>
+                      ))}
+                    </ScrollArea>
+                  </Card>
+                  </div>
+                </MediaQuery>
               <div>
                 <Typography  style={{color:'#FF8C00', fontSize: 50}}>
                     {this.state.tot}
@@ -139,39 +175,60 @@ class Checkout extends Component {
               </div>
             </div>
           </div>
+          <div>
+          <MediaQuery minDeviceWidth={800}>
             <div style={{width: '90%', height:400, marginLeft: 40, backgroundColor: '#FF8C00',  marginTop: 50, borderRadius: 50, marginRight:20}}>
-              <div style={{display:'flex', justifyContent:'flex-start', marginLeft: 30, marginTop: 60}}>
-              <FormControl component="fieldset">
-                <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
-                <RadioGroup aria-label="payment" name="payment" value={this.state.payment} onChange={(input) => this.setState({payment: input})}>
-                  <div style={{display:'flex', flexDirection:'row'}}>
-                    <EuroIcon style={{fontSize: 60, marginRight: 30, color: '#2C3539'}} />
-                    <FormControlLabel value="cash" control={<Radio style={{color: 'white'}} />} label="Contanti" />
-                  </div>
-                  <div style={{display:'flex', flexDirection:'row'}}>
-                  <CreditCardIcon style={{fontSize:60, marginRight: 30, color:'#2C3539'}} />
-                  <FormControlLabel value="card" control={<Radio  style={{color: 'white'}}/>} label="Carte" />
-                  </div>
-                </RadioGroup>
-                </FormControl>
-              </div>
+                <div style={{display:'flex', justifyContent:'flex-start', marginLeft: 30, marginTop: 60}}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
+                  <RadioGroup aria-label="payment" name="payment" value={this.state.payment} onChange={(input) => this.setState({payment: input})}>
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                      <EuroIcon style={{fontSize: 60, marginRight: 30, color: '#2C3539'}} />
+                      <FormControlLabel value="cash" control={<Radio style={{color: 'white'}} />} label="Contanti" />
+                    </div>
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                    <CreditCardIcon style={{fontSize:60, marginRight: 30, color:'#2C3539'}} />
+                    <FormControlLabel value="card" control={<Radio  style={{color: 'white'}}/>} label="Carte" />
+                    </div>
+                  </RadioGroup>
+                  </FormControl>
+                </div>
+                </div>
+              </MediaQuery>
             </div>
-            <div style={{width: '90%', height: 'auto', position: 'absolute', bottom:50, justifyContent:'center'}}>
-            </div>
-            <div style={{position: 'absolute', bottom: 5, right: 30}}>
-            <Link to='/receipt'>
-              <Button
-                style={{width: 310, height: 60, background:'#FF8C00', borderRadius:50}}
-                variant="contained"
-                color="primary"
-                label="invia il tuo ordine"
-                onClick={this.send_order}>
-                  <Typography component='h5' variant='h5' style={{color: 'white'}}>
-                    Ordina
-                  </Typography>
-              </Button>
-            </Link>
-            </div>
+          </div>
+          <div>
+          <MediaQuery maxDeviceWidth={700}>
+            <div style={{width: '90%', display:'flex', justifyContent:'center', borderRadius: 50, marginRight:20}}>
+                <div style={{display:'flex', justifyContent:'center', marginLeft: 30, flexDirection:'row'}}>
+                <FormControl component="fieldset">
+                  <FormLabel component="legend"><Typography> Come vorresti pagare?</Typography></FormLabel>
+                  <RadioGroup aria-label="payment" name="payment" value={this.state.payment} onChange={(input) => this.setState({payment: input})}>
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                      <EuroIcon style={{fontSize: 30, marginRight: 30, color: '#FF8C00'}} />
+                      <FormControlLabel value="cash" control={<Radio style={{color: '#FF8C00'}} />} label="Contanti" />
+                    </div>
+                    <div style={{display:'flex', flexDirection:'row'}}>
+                    <CreditCardIcon style={{fontSize:30, marginRight:30, color:'#FF8C00'}} />
+                    <FormControlLabel value="card" control={<Radio  style={{color: '#FF8C00'}}/>} label="Carte" />
+                    </div>
+                  </RadioGroup>
+                  </FormControl>
+                </div>
+                </div>
+              </MediaQuery>
+          <Link to='/receipt'>
+            <Button
+              style={{width: '100%', height: 50, background:'#FF8C00', borderRadius:50, marginTop: 10}}
+              variant="contained"
+              color="primary"
+              label="invia il tuo ordine"
+              onClick={this.send_order}>
+                <Typography component='h5' variant='h5' style={{color: 'white'}}>
+                  Ordina
+                </Typography>
+            </Button>
+          </Link>
           </div>
         </div>
         </Bounce>

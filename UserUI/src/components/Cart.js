@@ -16,7 +16,7 @@ const content = {
   height: 100,
   display:'flex',
   alignItems: 'center',
-  width: 510
+  width: '100%'
 };
 const container = {
   height: 420,
@@ -25,17 +25,18 @@ const container = {
 };
 
 const button = {
-  width: 400,
+  width: '100%',
   height: 60,
   borderRadius: 40,
   backgroundColor: '#FF8C00',
 }
 
 const cardMedia = {
-  width: '17%',
+  width: '25%',
   height: 100,
   borderRadius:50,
   justifyContent: 'flex-start',
+
 }
 
 
@@ -126,12 +127,12 @@ class Cart extends Component {
                 <HeadShake spy={item.title}>
                   <div key={item.title} style={content}>
                       <ItemImage pathPic={item.itemPic} />
-                      <div style={{left: '25%', position:'absolute'}}>
-                        <Typography variant='h5'>
+                      <div style={{left: '25%', position:'absolute', maxWidth: 100}}>
+                        <Typography variant='h6' component='h6' align='center'>
                           {item.quantity + ' ' +item.title}
                         </Typography>
                       </div>
-                      <div style={{right: 20, position:'absolute'}}>
+                      <div style={{right: 5, position:'absolute'}}>
                         <ShopCard
                           itemTitle={item.title}
                           quantity={item.quantity}

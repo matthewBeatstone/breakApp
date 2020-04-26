@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Keyboard from './Keyboard.js';
 import Bounce from 'react-reveal/Bounce';
+import {withRouter} from 'react-router-dom';
+import { Alert, AlertTitle } from '@material-ui/lab';
 
 
 function mapStateToProps(state){
@@ -66,8 +68,14 @@ class Receipt extends Component {
     .then(data => {
       if (data.success) {
         console.log('sent')
-      } else {
-        console.log('error')
+        this.props.history.push('/index')
+
+
+      }
+      else {
+        this.props.history.push('/index')
+
+        
       }
     });
     console.log(this.state.SmsBody)
@@ -89,31 +97,33 @@ class Receipt extends Component {
         <Bounce right>
           <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
             <div>
-            <Typography component='h5' variant='h5' style={{color: 'white', marginTop: 50}}>
+            <Typography component='h5' variant='h5' style={{color: 'white', marginTop: 20}}>
               Inserisci il tuo numero e ricevi lo scontrino via sms
             </Typography>
             </div>
             <div style={{display:'flex', justifyContent:'center'}}>
-                <form noValidate autoComplete="off" style={{backgroundColor: '#FF8C00', borderRadius: 20, width: 400, marginTop:10}}>
+                <form noValidate autoComplete="off" style={{backgroundColor: '#FF8C00', borderRadius:10, width: '100%', marginTop:10}}>
                   <TextField
                     id="standard-basic"
                     label="Tel."
-                    style={{width:400}}
+                    style={{width:'100%'}}
                     value={this.state.phoneNumber}
                     onChange={(input) => this.setState({phoneNumber: input.target.value})}
                     value={this.state.phoneNumber} />
                 </form>
             </div>
+            <div style={{display:'flex', justifyContent:'center'}}>
               <Button
-                style={{width: 200, height: 90, marginLeft: 30, marginTop: 50, background:'#FF8C00', borderRadius:50}}
+                style={{width: 300, height: 50, marginTop: 50, background:'#FF8C00', borderRadius:50}}
                 variant="contained"
                 color="primary"
                 label="invia il tuo ordine"
                 onClick={this.onSubmit.bind(this)}>
                 Invia SMS
               </Button>
+            </div>
           </div>
-          <div style={{display:'flex', justifyContent:'center', marginTop: 80}}>
+          <div style={{display:'flex', justifyContent:'center', marginTop: 50}}>
             <Keyboard show={true} handleKey={this.handleKeyboard.bind(this)} canc={this.handleCanc.bind(this)}/>
           </div>
 
@@ -127,4 +137,4 @@ class Receipt extends Component {
   }
 }
 
-export default connect(mapStateToProps)(Receipt)
+export default withRouter(connect(mapStateToProps)(Receipt))

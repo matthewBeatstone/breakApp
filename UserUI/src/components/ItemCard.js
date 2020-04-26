@@ -21,6 +21,9 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
+
 
 
 
@@ -45,6 +48,7 @@ function mapDispatchToProps(dispatch){
 const card = {
     display: 'flex',
     flexDirection:'row',
+    width:'100%'
 
   };
 const details = {
@@ -163,14 +167,12 @@ class ItemCard extends Component {
             <IconButton aria-label="next" onClick={this.addItem.bind(this)}>
               <AddCircleRoundedIcon style={{fontSize:35}}/>
             </IconButton>
-            <Button
-            variant="contained"
-            color="primary"
-            style={button}
+            <CheckCircleIcon
+            style={{fontSize: 45, color: '#FF8C00'}}
             onClick={this.addItemToCart.bind(this)}>
 
               Aggiungi
-            </Button>
+            </CheckCircleIcon>
           </div>
         </div>
         </div>

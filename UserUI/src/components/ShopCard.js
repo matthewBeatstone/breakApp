@@ -3,6 +3,8 @@ import IconButton from '@material-ui/core/IconButton';
 import CancelIcon from '@material-ui/icons/Cancel';
 import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
 import AddCircleRoundedIcon from '@material-ui/icons/AddCircleRounded';
+import MediaQuery from 'react-responsive';
+
 
 
 import {connect} from 'react-redux';
@@ -79,11 +81,12 @@ class ShopCard extends Component {
 
 
   }
-  
+
 
   render(){
     return (
       <div>
+        <MediaQuery minDeviceWidth={1024}>
         <div style={details}>
           <div style={controls}>
               <IconButton
@@ -94,9 +97,25 @@ class ShopCard extends Component {
             <IconButton aria-label="next" onClick={this.add.bind(this)} >
               <AddCircleRoundedIcon style={{fontSize:40}}/>
             </IconButton>
-            <CancelIcon style={{fontSize:40, marginLeft:30}} onClick={() => this.props.remove_item(this.state.title)}/>
+            <CancelIcon style={{fontSize:40, marginLeft:20}} onClick={() => this.props.remove_item(this.state.title)}/>
           </div>
         </div>
+        </MediaQuery>
+        <MediaQuery maxDeviceWidth={1023}>
+          <div style={details}>
+            <div style={controls}>
+                <IconButton
+                  aria-label="previous"
+                  onClick={this.remove.bind(this)}>
+                 <RemoveCircleRoundedIcon style={{fontSize:35}}/>
+              </IconButton>
+              <IconButton aria-label="next" onClick={this.add.bind(this)} >
+                <AddCircleRoundedIcon style={{fontSize:35}}/>
+              </IconButton>
+              <CancelIcon style={{fontSize:30, marginLeft:20}} onClick={() => this.props.remove_item(this.state.title)}/>
+            </div>
+          </div>
+        </MediaQuery>
     </div>
 
     )

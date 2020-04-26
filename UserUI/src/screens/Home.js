@@ -26,7 +26,7 @@ const modal = {
 };
 
 const modalContainer = {
-    width: 400,
+    width: '100%',
     height: 500,
     borderRadius: 30,
     backgroundColor: '#2C3539'
@@ -45,13 +45,6 @@ class Home extends Component {
     }
 
 
-  }
-
-  openModal(){
-    this.setState({modalState: true})
-  }
-  closeModal(){
-    this.setState({modalState: false})
   }
 
 
@@ -76,7 +69,7 @@ class Home extends Component {
     render() {
       return (
         <div>
-        <Header path='/index' />
+        <Header path='/index' order={this.props.order.length}/>
         <MediaQuery minDeviceWidth={1024}>
         <div style={{background:'#2C3539', width: 1020 ,height: 580 }}>
           <div style={{marginTop:10}}>
@@ -96,29 +89,8 @@ class Home extends Component {
             <MediaQuery maxDeviceWidth={1000}>
               <div style={{background:'#2C3539'}}>
                 <div style={{marginTop:30, marginLeft: '23%', display:'flex', justifyContent:'center'}}>
-                  <ProductCategories cols={1} height={700} />
+                  <ProductCategories cols={1} height={'98%'} />
                 </div>
-            </div>
-            <div style={{position:'absolute', bottom: 5, left: 10}}>
-              <Badge badgeContent={this.props.order.length} color='primary'>
-                <ShoppingCartIcon style={{fontSize: 50, color: '#FF8C00'}} onClick={() => this.setState({modalState:true})}/>
-              </Badge>
-              <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                style={modal}
-                open={this.state.modalState}
-                onClose={this.closeModal.bind(this)}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                  timeout: 1000,
-                }}
-              >
-                <div style={modalContainer}>
-                    <Cart />
-                </div>
-              </Modal>
             </div>
             </MediaQuery>
           </div>

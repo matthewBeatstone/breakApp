@@ -15,7 +15,11 @@ import Zoom from 'react-reveal/Zoom';
 import ItemCard from './ItemCard.js';
 import {connect} from 'react-redux';
 import GridList from '@material-ui/core/GridList';
-import OptionsCard from './OptionsCard.js'
+import OptionsCard from './OptionsCard.js';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RemoveCircleRoundedIcon from '@material-ui/icons/RemoveCircleRounded';
+
+
 
 
 const card = {
@@ -35,9 +39,10 @@ const modal = {
 };
 
 const modalContainer = {
-    width: 400,
+    width: '98%',
     height: 600,
-    borderRadius: 30
+    borderRadius: 30,
+    backgroundColor:'white'
 };
 
 const cardContainer = {
@@ -103,12 +108,13 @@ class ProductCard extends Component {
               }}
             >
             <div style={modalContainer}>
+                <RemoveCircleRoundedIcon style={{fontSize: 40, marginLeft: 10, color: '#2C3539'}} onClick={()=>this.setState({modalState:false})} />
             <ScrollArea
                 speed={1.5}
                 className="area"
                 contentClassName="content"
                 horizontal={false}
-                style={{height: 600}}
+                style={{height: '98%'}}
                 >
               {this.props.items.map(item => (
                 <div key={item.title} style={{justifyContent:'flex-start'}}>
